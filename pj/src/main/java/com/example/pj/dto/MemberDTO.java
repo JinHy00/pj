@@ -10,9 +10,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class MemberDTO {
-	private String userID;
-	private String userName;
-	private String userPwd;
+	private String userid;
+	private String name;
+	private String passwd;
 	private String email;
 	private String phoneNum;
 	private String zipcode;
