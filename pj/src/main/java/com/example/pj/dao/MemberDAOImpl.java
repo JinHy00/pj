@@ -39,7 +39,7 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public int checkPasswd(String userid, String passwd) { // ✅ 최적화
+    public int checkPasswd(String userid, String passwd) { 
         Map<String, Object> map = new HashMap<>();
         map.put("userid", userid);
         map.put("passwd", passwd);
