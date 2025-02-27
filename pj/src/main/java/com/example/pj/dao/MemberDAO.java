@@ -1,13 +1,11 @@
 package com.example.pj.dao;
 
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+
 import com.example.pj.dto.MemberDTO;
 
+@Mapper
 public interface MemberDAO {
-    List<MemberDTO> list();
-    void insert(MemberDTO dto);
-    MemberDTO detail(String userid);
-    void delete(String userid);
-    void update(MemberDTO dto);
-    int checkPasswd(String userid, String passwd); 
+    void insertMember(MemberDTO member);  // 회원가입
+    MemberDTO loginMember(String userid, String passwd); // 로그인
 }
