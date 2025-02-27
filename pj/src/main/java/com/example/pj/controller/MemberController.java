@@ -21,7 +21,7 @@ public class MemberController {
     }
 
     // 회원가입
-    @PostMapping("/register")
+    @PostMapping("/join")
     public Map<String, Object> register(@RequestBody MemberDTO dto) {
         Map<String, Object> response = new HashMap<>();
         try {
