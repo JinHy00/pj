@@ -14,13 +14,13 @@ public class MemberController {
     @Autowired
     MemberDAO memberDao;
 
-    // ✅ 회원 목록 조회
+    // 회원 목록 조회
     @GetMapping("/list")
     public List<MemberDTO> memberList() {
         return memberDao.list();
     }
 
-    // ✅ 회원가입
+    // 회원가입
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody MemberDTO dto) {
         Map<String, Object> response = new HashMap<>();
@@ -34,13 +34,13 @@ public class MemberController {
         return response;
     }
 
-    // ✅ 회원 상세 조회
+    // 회원 상세 조회
     @GetMapping("/detail/{userid}")
     public MemberDTO memberDetail(@PathVariable String userid) {
         return memberDao.detail(userid);
     }
 
-    // ✅ 회원 정보 수정
+    // 회원 정보 수정
     @PutMapping("/update")
     public Map<String, Object> update(@RequestBody MemberDTO dto) {
         Map<String, Object> response = new HashMap<>();
@@ -56,7 +56,7 @@ public class MemberController {
         return response;
     }
 
-    // ✅ 회원 삭제 (`DELETE` 요청을 `@RequestBody`로 처리)
+    // 회원 삭제 
     @DeleteMapping("/delete")
     public Map<String, Object> delete(@RequestBody Map<String, String> requestData) {
         Map<String, Object> response = new HashMap<>();
@@ -75,7 +75,7 @@ public class MemberController {
         return response;
     }
 
-    // ✅ 로그인
+    // 로그인
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody Map<String, String> loginData) {
         Map<String, Object> response = new HashMap<>();

@@ -9,5 +9,5 @@ public interface MemberDAO {
     MemberDTO detail(String userid);
     void delete(String userid);
     void update(MemberDTO dto);
-    int checkPasswd(String userid, String passwd); // ✅ boolean -> int로 변경
+    int checkPasswd(String userid, String passwd); // boolean -> int로 변경
 }

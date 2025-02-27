@@ -34,7 +34,7 @@
         DELETE FROM member WHERE userid = #{userid}
     </delete>
 
-    <!-- 비밀번호 확인 (서비스 레이어에서 해시 비교 권장) -->
+    <!-- 비밀번호 확인 -->
     <select id="check_passwd" resultType="int">
         SELECT COUNT(*) 
         FROM member 
