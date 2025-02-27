@@ -22,7 +22,7 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/join")
-    public Map<String, Object> register(@RequestBody MemberDTO dto) {
+    public Map<String, Object> join(@RequestBody MemberDTO dto) {
         Map<String, Object> response = new HashMap<>();
         try {
             memberDao.insert(dto);
