@@ -2,6 +2,8 @@ package com.example.pj.dto;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,8 +17,7 @@ public class NoticeDTO {
 	private int n_categoryCode;
 	private String noticeTitle;
 	private String noticeContent;
-	private String[] files;
-	private int cnt;
-	private int hit;
 	private Date noticeDate;
+	private String filename;
+	private MultipartFile img;
 }

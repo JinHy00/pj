@@ -3,7 +3,42 @@
 <mapper namespace="notice">
 
 	<select id="list" resultType="com.example.pj.dto.NoticeDTO">
-		
+		select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate
+		from notice n
+		join n_category nc on n.n_categoryCode = nc.n_categoryCode
+		order by noticeCode, noticeDate desc
 	</select>
 
+	<insert id="insert">
+		insert into notice (adminid, noticeTitle,noticeContent,n_categoryCode,filename) 
+		values (#{adminid},#{noticeTitle}, #{noticeContent},#{n_categoryCode},#{filename})
+	</insert>
+	
+	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
+		select noticeCode, noticeTitle, noticeContent, noticeDate
+		from notice
+		where noticeCode=#{noticeCode}
+	</select>
+	
+	
+	<update id="update">
+		update notice 
+		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent} 
+		where noticeCode=${noticeCode}
+	</update>
+	
+	<delete id="delete">
+		delete from notice where noticeCode=${noticeCode}
+	</delete>
+	
+	<select id="filename" resultType="String">
+		select filename 
+		from notice
+		where noticeCode=#{noticeCode}
+	</select>
+	
+	<select id="category" resultType="com.example.pj.dto.NoticeCategoryDTO">
+		select n_categoryCode, n_categoryName 
+		from n_category
+	</select>
 </mapper>
