@@ -14,12 +14,12 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping("/register")
-    public boolean register(@RequestBody MemberDTO member) {
-        return memberService.registerMember(member);
+    public boolean register(@RequestBody MemberDTO dto) {
+        return memberService.registerMember(dto);
     }
 
     @PostMapping("/login")
-    public MemberDTO login(@RequestBody MemberDTO member) {
-        return memberService.login(member.getUserid(), member.getPasswd());
+    public MemberDTO login(@RequestBody MemberDTO dto) {
+        return memberService.login(dto.getUserid(), dto.getPasswd());
     }
 }

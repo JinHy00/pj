@@ -10,9 +10,9 @@ public class MemberService {
     @Autowired
     private MemberDAO memberDAO;
 
-    public boolean registerMember(MemberDTO member) {
+    public boolean registerMember(MemberDTO dto) {
         try {
-            memberDAO.insertMember(member);
+            memberDAO.insertMember(dto);
             return true;
         } catch (Exception e) {
             return false;
