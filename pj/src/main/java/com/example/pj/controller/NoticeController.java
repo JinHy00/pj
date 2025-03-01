@@ -44,8 +44,11 @@ public class NoticeController {
 			}
 		}
 		Map<String, Object> map = new HashMap<>();
-		map.put("filename", filename);
-		map.put("dto", dto);
+		map.put("noticeCode", dto.getNoticeCode());
+		map.put("noticeTitle", dto.getNoticeTitle());
+		map.put("noticeContent", dto.getNoticeContent());
+		map.put("n_categoryCode", dto.getN_categoryCode());
+		map.put("noticeFile", filename);
 		return noticeService.insert(map);
 	}
 	
@@ -79,7 +82,7 @@ public class NoticeController {
 	
 	@GetMapping("/delete/{noticeCode}")
 	public void delete(NoticeDTO dto, HttpServletRequest request) {
-		String filename = dto.getFilename();
+		String filename = dto.getNoticeFile();
 		if (filename != null && !filename.equals("-")) {
 			String path = request.getSession().getServletContext().getRealPath("/images/");
 			File f = new File(path + filename);

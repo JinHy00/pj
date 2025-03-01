@@ -2,15 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 
-	<select id="list" resultType="com.example.pj.dto.NoticeDTO">
-		select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate
+	<select id="list" resultType="com.example.pj.dto.NoticeDTO">select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate,noticeFIle
 		from notice n
 		join n_category nc on n.n_categoryCode = nc.n_categoryCode
-		order by noticeCode, noticeDate desc
-	</select>
+		order by noticeCode, noticeDate desc</select>
 
 	<insert id="insert">insert into notice (noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
-		values (#{noticeTitle}, #{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
+		values (#{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, noticeTitle, noticeContent, noticeDate
