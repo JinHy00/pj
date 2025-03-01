@@ -20,17 +20,17 @@ import com.example.pj.service.NoticeService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/notice/*")
+@RequestMapping("/api/notice")
 public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
 	
-	@RequestMapping("list")
+	@RequestMapping("/list")
 	public List<NoticeDTO> notice_list(@RequestParam(name = "searchkey", defaultValue = "title") String searchkey, @RequestParam(name = "search", defaultValue = "") String search) {
 		return noticeService.list(searchkey, search);
 	}
 	
-	@PostMapping("insert")
+	@PostMapping("/insert")
 	public String notice_insert(NoticeDTO dto, HttpServletRequest request) {
 		String filename = "-";
 		if (dto.getImg() != null && !dto.getImg().isEmpty()) {
@@ -49,12 +49,12 @@ public class NoticeController {
 		return noticeService.insert(map);
 	}
 	
-	@GetMapping("detail/{noticeCode}")
+	@GetMapping("/detail/{noticeCode}")
 	public Map<String, Object> notice_detail(@PathVariable(name = "noticeCode") int noticeCode) {
 		return noticeService.detail(noticeCode);	
 	}
 	
-	@PostMapping("update")
+	@PostMapping("/update")
 	public String notice_update(NoticeDTO dto, HttpServletRequest request) {
 		String filename = "-";
 		if (dto.getImg() != null && !dto.getImg().isEmpty()) {
@@ -77,7 +77,7 @@ public class NoticeController {
 		return noticeService.update(map);
 	}
 	
-	@GetMapping("delete/{noticeCode}")
+	@GetMapping("/delete/{noticeCode}")
 	public void delete(NoticeDTO dto, HttpServletRequest request) {
 		String filename = dto.getFilename();
 		if (filename != null && !filename.equals("-")) {
@@ -91,7 +91,7 @@ public class NoticeController {
 		noticeService.delete(noticeCode);
 	}
 	
-	@RequestMapping("category")
+	@RequestMapping("/category")
 	public List<NoticeCategoryDTO> category() {
 		return noticeService.category();
 	}

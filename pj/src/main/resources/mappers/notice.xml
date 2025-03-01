@@ -9,10 +9,8 @@
 		order by noticeCode, noticeDate desc
 	</select>
 
-	<insert id="insert">
-		insert into notice (adminid, noticeTitle,noticeContent,n_categoryCode,filename) 
-		values (#{adminid},#{noticeTitle}, #{noticeContent},#{n_categoryCode},#{filename})
-	</insert>
+	<insert id="insert">insert into notice (noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
+		values (#{noticeTitle}, #{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, noticeTitle, noticeContent, noticeDate

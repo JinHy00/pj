@@ -24,9 +24,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public String insert(Map<String, Object> map) {
-		return sqlSession.selectOne("notice.insert", map);
-		
+	public String insert(Map<String, Object> map) { 
+		sqlSession.insert("notice.insert", map);	
+		return "";
 	}
 
 	@Override
