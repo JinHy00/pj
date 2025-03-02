@@ -20,6 +20,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public List<NoticeDTO> list(String searchkey, String search) {
 		Map<String, Object> map = new HashMap<>();
+		map.put("searchkey", searchkey);
+		map.put("search", search);
 		return sqlSession.selectList("notice.list", map);
 	}
 
@@ -30,7 +32,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public Map<String, Object> detail(int noticeCode) {
+	public NoticeDTO detail(int noticeCode) {
+		return sqlSession.selectOne("notice.edit", noticeCode);
+	}
+	
+	@Override
+	public NoticeDTO edit(int noticeCode) {
 		return sqlSession.selectOne("notice.detail", noticeCode);
 	}
 

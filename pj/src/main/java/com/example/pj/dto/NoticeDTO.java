@@ -20,7 +20,16 @@ public class NoticeDTO {
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;
+	private String n_categoryName;
 	
+	public String getN_categoryName() {
+		return n_categoryName;
+	}
+
+	public void setN_categoryName(String n_categoryName) {
+		this.n_categoryName = n_categoryName;
+	}
+
 	public int getNoticeCode() {
 		return noticeCode;
 	}

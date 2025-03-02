@@ -29,8 +29,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public Map<String, Object> detail(int noticeCode) {
+	public NoticeDTO detail(int noticeCode) {
 		return noticeDao.detail(noticeCode);
+	}
+	
+	@Override
+	public NoticeDTO edit(int noticeCode) {
+		return noticeDao.edit(noticeCode);
 	}
 	
 	@Transactional

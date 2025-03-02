@@ -2,25 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 
-	<select id="list" resultType="com.example.pj.dto.NoticeDTO">select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate,noticeFIle
-		from notice n
-		join n_category nc on n.n_categoryCode = nc.n_categoryCode
-		order by noticeCode, noticeDate desc</select>
+	<select id="list" resultType="com.example.pj.dto.NoticeDTO">
+		SELECT 
+            noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate, noticeFile
+        FROM 
+            notice n
+        JOIN 
+            n_category nc ON n.n_categoryCode = nc.n_categoryCode
+        <where>
+            <if test="searchkey != null and search != null and search != ''">
+                AND ${searchkey} LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        ORDER BY noticeDate DESC
+    </select>
 
 	<insert id="insert">insert into notice (noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
 		values (#{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
-		select noticeCode, noticeTitle, noticeContent, noticeDate
-		from notice
+		select noticeCode, nc.n_categoryName, noticeTitle, noticeContent, noticeDate, noticeFile
+		from notice n
+		join n_category nc ON n.n_categoryCode = nc.n_categoryCode
 		where noticeCode=#{noticeCode}
 	</select>
 	
+	<select id="edit" resultType="com.example.pj.dto.NoticeDTO">
+		select noticeCode, nc.n_categoryName, noticeTitle, noticeContent, noticeDate, noticeFile
+		from notice n
+		join n_category nc ON n.n_categoryCode = nc.n_categoryCode
+		where noticeCode=#{noticeCode}
+	</select>
 	
 	<update id="update">
 		update notice 
-		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent} 
-		where noticeCode=${noticeCode}
+		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, noticeFile=#{noticeFile}, n_categoryCode=#{n_categoryCode}
+		where noticeCode=#{noticeCode}
 	</update>
 	
 	<delete id="delete">

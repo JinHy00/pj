@@ -11,7 +11,9 @@ public interface NoticeDAO {
 	
 	String insert(Map<String, Object> map);
 	
-	Map<String, Object> detail(int noticeCode);
+	NoticeDTO detail(int noticeCode);
+
+	NoticeDTO edit(int noticeCode);
 	
 	String update(Map<String, Object> map);
 	

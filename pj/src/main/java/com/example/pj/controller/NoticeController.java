@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import com.example.pj.dto.NoticeCategoryDTO;
 import com.example.pj.dto.NoticeDTO;
 import com.example.pj.service.NoticeService;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -31,14 +33,14 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/insert")
-	public String notice_insert(NoticeDTO dto, HttpServletRequest request) {
+	public String notice_insert(NoticeDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
-		if (dto.getImg() != null && !dto.getImg().isEmpty()) {
-			filename = dto.getImg().getOriginalFilename();
+		if (img != null && !img.isEmpty()) {
+			filename = img.getOriginalFilename();
 			try {
-				String path = request.getSession().getServletContext().getRealPath("/images/");
-				new File(path).mkdir();
-				dto.getImg().transferTo(new File(path + filename));
+				ServletContext application = request.getSession().getServletContext();
+				String path = application.getRealPath("/images/");
+				img.transferTo(new File(path + filename));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -53,30 +55,38 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/detail/{noticeCode}")
-	public Map<String, Object> notice_detail(@PathVariable(name = "noticeCode") int noticeCode) {
+	public NoticeDTO notice_detail(@PathVariable(name = "noticeCode") int noticeCode) {
 		return noticeService.detail(noticeCode);	
 	}
 	
+	@GetMapping("/edit/{noticeCode}")
+	public NoticeDTO notice_edit(@PathVariable(name = "noticeCode") int noticeCode) {
+		return noticeService.edit(noticeCode);	
+	}
+	
 	@PostMapping("/update")
-	public String notice_update(NoticeDTO dto, HttpServletRequest request) {
+	public String notice_update(NoticeDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
-		if (dto.getImg() != null && !dto.getImg().isEmpty()) {
-			filename = dto.getImg().getOriginalFilename();
+		if (img != null && !img.isEmpty()) {
+			filename = img.getOriginalFilename();
 			try {
-				String path = request.getSession().getServletContext().getRealPath("/images/");
-				new File(path).mkdir();
-				dto.getImg().transferTo(new File(path + filename));
+				ServletContext application = request.getSession().getServletContext();
+				String path = application.getRealPath("/images/");
+				img.transferTo(new File(path + filename));
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			}
 		} else {
 			int noticeCode = dto.getNoticeCode();
-			Map<String, Object> map2 = noticeService.detail(noticeCode);
-			filename = map2.get("filename").toString();
+	        NoticeDTO existingNotice = noticeService.detail(noticeCode);
+	        filename = existingNotice.getNoticeFile(); 
 		}
 		Map<String, Object> map = new HashMap<>();
-		map.put("filename", filename);
-		map.put("dto", dto);
+		map.put("noticeCode", dto.getNoticeCode());
+		map.put("noticeTitle", dto.getNoticeTitle());
+		map.put("noticeContent", dto.getNoticeContent());
+		map.put("n_categoryCode", dto.getN_categoryCode());
+		map.put("noticeFile", filename);
 		return noticeService.update(map);
 	}
 	
