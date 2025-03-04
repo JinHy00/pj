@@ -27,7 +27,7 @@ public class FAQController {
 	@Autowired
 	FAQService faqService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/list") //
 	public List<FAQDTO> Faq_list(@RequestParam(name = "searchkey", defaultValue = "title") String searchkey, @RequestParam(name = "search", defaultValue = "") String search) {
 		return faqService.list(searchkey, search);
 	}
