@@ -3,18 +3,15 @@
 <mapper namespace="notice">
 
 	<select id="list" resultType="com.example.pj.dto.NoticeDTO">
-		SELECT 
-            noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate, noticeFile
-        FROM 
-            notice n
-        JOIN 
-            n_category nc ON n.n_categoryCode = nc.n_categoryCode
+		select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate, noticeFile
+        from notice n
+        join n_category nc on n.n_categoryCode = nc.n_categoryCode
         <where>
             <if test="searchkey != null and search != null and search != ''">
-                AND ${searchkey} LIKE CONCAT('%', #{search}, '%')
+                and ${searchkey} like concat('%', #{search}, '%')
             </if>
         </where>
-        ORDER BY noticeDate DESC
+        order by noticeDate desc
     </select>
 
 	<insert id="insert">insert into notice (noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
@@ -36,7 +33,8 @@
 	
 	<update id="update">
 		update notice 
-		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, noticeFile=#{noticeFile}, n_categoryCode=#{n_categoryCode}
+		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, 
+			noticeFile=#{noticeFile}, n_categoryCode=#{n_categoryCode}
 		where noticeCode=#{noticeCode}
 	</update>
 	

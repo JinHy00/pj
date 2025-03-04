@@ -5,14 +5,12 @@ import java.sql.Date;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 public class NoticeDTO {
 	private int noticeCode;
 	private String adminid;
