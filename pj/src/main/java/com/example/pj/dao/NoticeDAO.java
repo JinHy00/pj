@@ -15,7 +15,7 @@ public interface NoticeDAO {
 
 	NoticeDTO edit(int noticeCode);
 	
-	String update(Map<String, Object> map);
+	void update(Map<String, Object> map);
 	
 	void delete(int noticeCode);
 	

@@ -40,8 +40,8 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Transactional
 	@Override
-	public String update(Map<String, Object> map) {
-		return noticeDao.update(map);
+	public void update(Map<String, Object> map) {
+		noticeDao.update(map);
 	}
 	
 	@Override

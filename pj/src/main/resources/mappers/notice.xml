@@ -20,14 +20,14 @@
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, nc.n_categoryName, noticeTitle, noticeContent, noticeDate, noticeFile
 		from notice n
-		join n_category nc ON n.n_categoryCode = nc.n_categoryCode
+		join n_category nc on n.n_categoryCode = nc.n_categoryCode
 		where noticeCode=#{noticeCode}
 	</select>
 	
 	<select id="edit" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, nc.n_categoryName, noticeTitle, noticeContent, noticeDate, noticeFile
 		from notice n
-		join n_category nc ON n.n_categoryCode = nc.n_categoryCode
+		join n_category nc on n.n_categoryCode = nc.n_categoryCode
 		where noticeCode=#{noticeCode}
 	</select>
 	
@@ -43,7 +43,7 @@
 	</delete>
 	
 	<select id="filename" resultType="String">
-		select filename 
+		select noticeFile
 		from notice
 		where noticeCode=#{noticeCode}
 	</select>

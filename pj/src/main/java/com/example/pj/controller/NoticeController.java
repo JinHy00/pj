@@ -65,7 +65,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/update")
-	public String notice_update(NoticeDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
+	public void notice_update(NoticeDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
 		if (img != null && !img.isEmpty()) {
 			filename = img.getOriginalFilename();
@@ -78,8 +78,8 @@ public class NoticeController {
 			}
 		} else {
 			int noticeCode = dto.getNoticeCode();
-	        NoticeDTO existingNotice = noticeService.detail(noticeCode);
-	        filename = existingNotice.getNoticeFile(); 
+	        NoticeDTO notice = noticeService.detail(noticeCode);
+	        filename = notice.getNoticeFile(); 
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("noticeCode", dto.getNoticeCode());
@@ -87,7 +87,7 @@ public class NoticeController {
 		map.put("noticeContent", dto.getNoticeContent());
 		map.put("n_categoryCode", dto.getN_categoryCode());
 		map.put("noticeFile", filename);
-		return noticeService.update(map);
+		noticeService.update(map);
 	}
 	
 	@GetMapping("/delete/{noticeCode}")

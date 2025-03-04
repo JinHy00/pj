@@ -42,8 +42,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public String update(Map<String, Object> map) {
-		return sqlSession.selectOne("notice.update", map);
+	public void update(Map<String, Object> map) {
+		sqlSession.update("notice.update", map);
 	}
 
 	@Override
