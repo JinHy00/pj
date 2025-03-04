@@ -31,5 +31,11 @@ public interface ProductMapper {
       
       // 상품삭제
       void delete(int ProductCode);
+      
+      // 이미지1
+      String mainImg(int productCode);
+      
+      // 이미지2
+      String detailImg(int productCode); 
 }
 

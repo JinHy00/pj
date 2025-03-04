@@ -64,4 +64,13 @@ public class ProductServiceImpl implements ProductService {
       productMapper.delete(ProductCode);
    }
 
+   @Override
+	public String mainImg(int productCode) {
+		return productMapper.mainImg(productCode);
+	}
+   
+   @Override
+	public String detailImg(int productCode) {
+		return productMapper.detailImg(productCode);
+	}
 }
