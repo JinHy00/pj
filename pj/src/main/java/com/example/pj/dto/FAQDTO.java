@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class FAQDTO {
 	private int faqCode;
+	private String adminid;
 	private int f_categoryCode;
 	private String faqTitle;
 	private String faqContent;

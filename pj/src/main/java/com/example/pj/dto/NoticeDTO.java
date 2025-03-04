@@ -19,6 +19,8 @@ public class NoticeDTO {
 	private String noticeContent;
 	private Date noticeDate;
 	private String n_categoryName;
+	private String noticeFile;
+	private MultipartFile img;
 	
 	public String getN_categoryName() {
 		return n_categoryName;
@@ -83,9 +85,6 @@ public class NoticeDTO {
 	public void setNoticeFile(String noticeFile) {
 		this.noticeFile = noticeFile;
 	}
-
-	private String noticeFile;
-	private MultipartFile img;
 	
 	public MultipartFile getImg() {
 		return img;

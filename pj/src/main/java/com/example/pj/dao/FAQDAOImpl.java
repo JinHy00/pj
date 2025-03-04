@@ -33,12 +33,12 @@ public class FAQDAOImpl implements FAQDAO {
 
 	@Override
 	public FAQDTO detail(int faqCode) {
-		return sqlSession.selectOne("faq.edit", faqCode);
+		return sqlSession.selectOne("faq.detail", faqCode);
 	}
 	
 	@Override
 	public FAQDTO edit(int faqCode) {
-		return sqlSession.selectOne("faq.detail", faqCode);
+		return sqlSession.selectOne("faq.edit", faqCode);
 	}
 
 	@Override

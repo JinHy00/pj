@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+
+	<select id="list" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile
+        from qna q
+        join q_category qc on q.q_categoryCode = qc.q_categoryCode
+        <where>
+            <if test="searchkey != null and search != null and search != ''">
+                and ${searchkey} like concat('%', #{search}, '%')
+            </if>
+        </where>
+        order by qnaDate desc
+    </select>
+
+	<insert id="insert">
+		insert into qna (qnaTitle, qnaContent, q_categoryCode, qnaFile) 
+		values (#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
+	</insert>
+	
+	<select id="detail" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
+		from qna q
+		join q_category qc on q.q_categoryCode = qc.q_categoryCode
+		where qnaCode=#{qnaCode}
+	</select>
+	
+	<select id="edit" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
+		from qna q
+		join q_category qc on q.q_categoryCode = qc.q_categoryCode
+		where qnaCode=#{qnaCode}
+	</select>
+	
+	<update id="update">
+		update qna 
+		set qnaTitle=#{qnaTitle}, qnaContent=#{qnaContent}, 
+			qnaFile=#{qnaFile}, q_categoryCode=#{q_categoryCode}
+		where qnaCode=#{qnaCode}
+	</update>
+	
+	<delete id="delete">
+		delete from qna where qnaCode=${qnaCode}
+	</delete>
+	
+	<select id="filename" resultType="String">
+		select qnaFile
+		from qna
+		where qnaCode=#{qnaCode}
+	</select>
+	
+	<select id="category" resultType="com.example.pj.dto.QnACategoryDTO">
+		select q_categoryCode, q_categoryName 
+		from q_category
+	</select>
+</mapper>
