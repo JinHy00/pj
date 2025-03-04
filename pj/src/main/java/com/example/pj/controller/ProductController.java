@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,6 +82,7 @@ public class ProductController {
 	}
 	
 	// 파일 업로드 배열로 하는 방법 찾아보기
+	@Transactional
 	@PostMapping("insert")
 	public void insert(ProductDTO dto, @RequestParam(name = "mainImg") MultipartFile mainImg, @RequestParam(name = "detailImg") MultipartFile detailImg, HttpServletRequest request) {
 		String mainImage = "";
@@ -104,6 +106,7 @@ public class ProductController {
 		productService.insert(dto);
 	}
 	
+	@Transactional
 	@PostMapping("update")
 	public void update(ProductDTO dto,  @RequestParam(name = "mainImg") MultipartFile mainImg, @RequestParam(name = "detailImg") MultipartFile detailImg, HttpServletRequest request) {
 		String mainImage =	dto.getMainImage();
