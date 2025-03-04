@@ -7,18 +7,18 @@ import com.example.pj.dto.MemberDTO;
 import com.example.pj.service.MemberService;
 
 @RestController
-@RequestMapping("/api/member")
+@RequestMapping("/api/member/*")
 public class MemberController {
     
     @Autowired
     private MemberService memberService;
 
-    @PostMapping("/register")
+    @PostMapping("register")
     public boolean register(@RequestBody MemberDTO dto) {
         return memberService.registerMember(dto);
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public MemberDTO login(@RequestBody MemberDTO dto) {
         return memberService.login(dto.getUserid(), dto.getPasswd());
     }

@@ -8,7 +8,7 @@
         values (#{userid}, #{name}, #{passwd}, #{email}, #{phonenum}, #{zipcode}, #{mainaddress}, #{detailaddress}, NOW())
     </insert>
 	
-	<select id="loginMember" parameterType="map" resultType="com.example.pj.dto.MemberDTO">
+	<select id="loginMember" resultType="com.example.pj.dto.MemberDTO">
     	select * from member where userid = #{userid} and passwd = #{passwd}
 	</select>
 
