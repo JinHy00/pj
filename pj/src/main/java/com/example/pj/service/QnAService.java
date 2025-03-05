@@ -10,13 +10,17 @@ public interface QnAService {
 	
 	List<QnADTO> list(String searchkey, String search);
 	
-	String insert(Map<String, Object> map);
+	String qna_insert(Map<String, Object> map);
+	
+	String reply_insert(Map<String, Object> map);
 	
 	QnADTO detail(int qnaCode);
 
 	QnADTO edit(int qnaCode);
 	
-	void update(Map<String, Object> map);
+	void qna_update(Map<String, Object> map);
+	
+	void reply_update(Map<String, Object> map);
 	
 	void delete(int qnaCode);
 	

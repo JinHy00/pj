@@ -5,19 +5,32 @@ import java.util.Map;
 
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 
 public interface QnADAO {
-	List<QnADTO> list(String searchkey, String search);
+	List<QnADTO> qna_list(String searchkey, String search);
 	
-	String insert(Map<String, Object> map);
+	// List<QnAReplyDTO> reply_list(String searchkey, String search);
 	
-	QnADTO detail(int qnaCode);
+	String qna_insert(Map<String, Object> map);
 	
-	QnADTO edit(int qnaCode);
+	String reply_insert(Map<String, Object> map);
 	
-	void update(Map<String, Object> map);
+	QnADTO qna_detail(int qnaCode);
 	
-	void delete(int qnaCode);
+	// QnAReplyDTO reply_detail(int qnaReplyCode);
+	
+	QnADTO qna_edit(int qnaCode);
+	
+	// QnAReplyDTO reply_edit(int qnaReplyCode);
+	
+	void qna_update(Map<String, Object> map);
+	
+	void reply_update(Map<String, Object> map);
+	
+	void qna_delete(int qnaCode);
+	
+	// void reply_delete(int qnaReplyCode);
 	
 	String filename(int qnaCode);
 	

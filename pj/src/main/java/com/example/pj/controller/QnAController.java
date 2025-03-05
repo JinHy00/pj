@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 import com.example.pj.service.QnAService;
 
 import jakarta.servlet.ServletContext;
@@ -32,7 +33,7 @@ public class QnAController {
 		return qnaService.list(searchkey, search);
 	}
 	
-	@PostMapping("/insert")
+	@PostMapping("/qna_insert")
 	public String qna_insert(QnADTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
 		if (img != null && !img.isEmpty()) {
@@ -51,7 +52,17 @@ public class QnAController {
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());
 		map.put("qnaFile", filename);
-		return qnaService.insert(map);
+		return qnaService.qna_insert(map);
+	}
+	
+	@PostMapping("/reply_insert")
+	public String reply_insert(QnAReplyDTO dto) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaCode", dto.getQnaCode());
+		map.put("qnaReplyCode", dto.getQnaReplyCode());
+		map.put("qnaReplytitle", dto.getQnaReplyTitle());
+		map.put("qnaReplyContent", dto.getQnaReplyContent());
+		return qnaService.reply_insert(map);
 	}
 	
 	@GetMapping("/detail/{qnaCode}")
@@ -64,7 +75,7 @@ public class QnAController {
 		return qnaService.edit(qnaCode);	
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/qna_update")
 	public void qna_update(QnADTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
 		if (img != null && !img.isEmpty()) {
@@ -87,7 +98,17 @@ public class QnAController {
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());
 		map.put("qnaFile", filename);
-		qnaService.update(map);
+		qnaService.qna_update(map);
+	}
+	
+	@PostMapping("/reply_update")
+	public void reply_update(QnAReplyDTO dto) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaCode", dto.getQnaCode());
+		map.put("qnaReplyCode", dto.getQnaReplyCode());
+		map.put("qnaReplyTitle", dto.getQnaReplyTitle());
+		map.put("qnaReplyContent", dto.getQnaReplyContent());
+		qnaService.reply_update(map);
 	}
 	
 	@GetMapping("/delete/{qnaCode}")

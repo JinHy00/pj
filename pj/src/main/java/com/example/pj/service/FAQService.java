@@ -19,8 +19,6 @@ public interface FAQService {
 	void update(Map<String, Object> map);
 	
 	void delete(int faqCode);
-	
-	String filename(int faqCode);
-	
+		
 	List<FAQCategoryDTO> category();
 }

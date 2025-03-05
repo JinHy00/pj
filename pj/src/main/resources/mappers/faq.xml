@@ -3,7 +3,7 @@
 <mapper namespace="faq">
 
 	<select id="list" resultType="com.example.pj.dto.FAQDTO">
-		select faqCode, faqTitle, faqContent, fc.f_categoryName, faqDate, faqFile
+		select faqCode, faqTitle, faqContent, fc.f_categoryName
         from faq f
         join f_category fc on f.f_categoryCode = fc.f_categoryCode
         <where>
@@ -11,23 +11,23 @@
                 and ${searchkey} like concat('%', #{search}, '%')
             </if>
         </where>
-        order by faqDate desc
+        order by faqCode desc
     </select>
 
 	<insert id="insert">
-		insert into faq (faqTitle, faqContent, f_categoryCode, faqFile) 
-		values (#{faqTitle},#{faqContent},#{f_categoryCode},#{faqFile})
+		insert into faq (faqTitle, faqContent, f_categoryCode) 
+		values (#{faqTitle},#{faqContent},#{f_categoryCode})
 	</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.FAQDTO">
-		select faqCode, fc.f_categoryName, faqTitle, faqContent, faqDate, faqFile
+		select faqCode, fc.f_categoryName, faqTitle, faqContent
 		from faq f
 		join f_category fc on f.f_categoryCode = fc.f_categoryCode
 		where faqCode=#{faqCode}
 	</select>
 	
 	<select id="edit" resultType="com.example.pj.dto.FAQDTO">
-		select faqCode, fc.f_categoryName, faqTitle, faqContent, faqDate, faqFile
+		select faqCode, fc.f_categoryName, faqTitle, faqContent
 		from faq f
 		join f_category fc on f.f_categoryCode = fc.f_categoryCode
 		where faqCode=#{faqCode}
@@ -35,20 +35,13 @@
 	
 	<update id="update">
 		update faq 
-		set faqTitle=#{faqTitle}, faqContent=#{faqContent}, 
-			faqFile=#{faqFile}, f_categoryCode=#{f_categoryCode}
+		set faqTitle=#{faqTitle}, faqContent=#{faqContent}, f_categoryCode=#{f_categoryCode}
 		where faqCode=#{faqCode}
 	</update>
 	
 	<delete id="delete">
 		delete from faq where faqCode=${faqCode}
 	</delete>
-	
-	<select id="filename" resultType="String">
-		select faqFile
-		from faq
-		where faqCode=#{faqCode}
-	</select>
 	
 	<select id="category" resultType="com.example.pj.dto.FAQCategoryDTO">
 		select f_categoryCode, f_categoryName 

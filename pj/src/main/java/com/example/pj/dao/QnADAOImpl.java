@@ -18,7 +18,7 @@ public class QnADAOImpl implements QnADAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<QnADTO> list(String searchkey, String search) {
+	public List<QnADTO> qna_list(String searchkey, String search) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchkey", searchkey);
 		map.put("search", search);
@@ -26,28 +26,39 @@ public class QnADAOImpl implements QnADAO {
 	}
 	
 	@Override
-	public String insert(Map<String, Object> map) {
-		sqlSession.insert("qna.insert", map);
+	public String qna_insert(Map<String, Object> map) {
+		sqlSession.insert("qna.qna_insert", map);
+		return "";	
+	}
+	
+	@Override
+	public String reply_insert(Map<String, Object> map) {
+		sqlSession.insert("qna.reply_insert", map);
 		return "";	
 	}
 
 	@Override
-	public QnADTO detail(int qnaCode) {
+	public QnADTO qna_detail(int qnaCode) {
 		return sqlSession.selectOne("qna.detail", qnaCode);
 	}
 
 	@Override
-	public QnADTO edit(int qnaCode) {
+	public QnADTO qna_edit(int qnaCode) {
 		return sqlSession.selectOne("qna.edit", qnaCode);
 	}
 
 	@Override
-	public void update(Map<String, Object> map) {
-		sqlSession.update("qna.update", map);
+	public void qna_update(Map<String, Object> map) {
+		sqlSession.update("qna.qna_update", map);
+	}
+	
+	@Override
+	public void reply_update(Map<String, Object> map) {
+		sqlSession.update("qna.reply_update", map);
 	}
 
 	@Override
-	public void delete(int qnaCode) {
+	public void qna_delete(int qnaCode) {
 		sqlSession.delete("qna.delete", qnaCode);
 	}
 
@@ -58,6 +69,6 @@ public class QnADAOImpl implements QnADAO {
 
 	@Override
 	public List<QnACategoryDTO> category() {
-		return sqlSession.selectList("qna.categoty");
+		return sqlSession.selectList("qna.category");
 	}
 }

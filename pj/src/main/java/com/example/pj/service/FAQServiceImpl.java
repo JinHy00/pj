@@ -50,11 +50,6 @@ public class FAQServiceImpl implements FAQService {
 	}
 	
 	@Override
-	public String filename(int faqCode) {
-		return faqDao.filename(faqCode);
-	}
-	
-	@Override
 	public List<FAQCategoryDTO> category() {
 		return faqDao.category();
 	}

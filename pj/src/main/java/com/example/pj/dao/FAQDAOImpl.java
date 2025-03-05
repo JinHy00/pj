@@ -50,11 +50,6 @@ public class FAQDAOImpl implements FAQDAO {
 	public void delete(int faqCode) {
 		sqlSession.delete("faq.delete", faqCode);
 	}
-
-	@Override
-	public String filename(int faqCode) {
-		return sqlSession.selectOne("faq.filename", faqCode);
-	}
 	
 	@Override
 	public List<FAQCategoryDTO> category() {
