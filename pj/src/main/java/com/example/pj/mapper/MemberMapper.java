@@ -1,15 +1,19 @@
-package com.example.pj.service;
+package com.example.pj.mapper;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Mapper;
 
 import com.example.pj.dto.MemberDTO;
 
-public interface MemberService {
+@Mapper
+public interface MemberMapper {
 	List<MemberDTO> list(); // 회원 리스트
 	
     void insertMember(MemberDTO dto);  // 회원가입
     
-    String loginMember(String userid, String passwd); // 로그인
+    String loginMember(Map<String, Object> map); // 로그인
     
     MemberDTO detail(String userid); // 회원정보
     
@@ -19,7 +23,7 @@ public interface MemberService {
     
     int id_check(String userid); // 아이디 중복 확인
     
-    int passwd_check(String userid, String passwd); // 비밀번호 확인
+    int passwd_check(Map<String, Object> map); // 비밀번호 확인
     
     // 포인트 사용
     void use_point(String userid);

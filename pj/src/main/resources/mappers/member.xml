@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.pj.dao.MemberDAO">  
+<mapper namespace="com.example.pj.mapper.MemberMapper">  
 
     <!-- 회원가입 -->
     <insert id="insertMember">
-        insert into member (userid, name, passwd, email, phonenum, zipcode, mainaddress, detailaddress, joindate)
-        values (#{userid}, #{name}, #{passwd}, #{email}, #{phonenum}, #{zipcode}, #{mainaddress}, #{detailaddress}, NOW())
+        insert into member (userid, name, passwd, email, phoneNum, zipCode, mainAddress, detailAddress)
+        values (#{userid}, #{name}, #{passwd}, #{email}, #{phoneNum}, #{zipCode}, #{mainAddress}, #{detailAddress})
     </insert>
 	
 	<select id="loginMember" resultType="com.example.pj.dto.MemberDTO">
-    	select * from member where userid = #{userid} and passwd = #{passwd}
+    	select name from member where userid = #{userid} and passwd = #{passwd}
 	</select>
+	
+	<select id="detail" resultType="com.example.pj.dto.MemberDTO">
+		select * from member where userid = #{userid}
+	</select>
+	
+	<delete id="delete">
+		delete from member where userid = #{userid}
+	</delete>
+	
+	<update id="update">
+		update member set
+		name = #{name}, email = #{email}, phoneNum = #{phoneNum}, zipCode = #{zipCode}, mainAddress = #{mainAddress}, detailAddress = #{detailAddress}
+	</update>
 
+	<select id="id_check" resultType="int">
+		select count(*) from member where userid = #{userid}
+	</select>
+	
+	<select id="passwd_check" resultType="int">
+		select count(*) from member where userid = #{userid} and passwd = #{passwd}
+	</select>
 </mapper>

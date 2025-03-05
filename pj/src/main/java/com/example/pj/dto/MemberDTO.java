@@ -14,9 +14,14 @@ public class MemberDTO {
 	private String name;
 	private String passwd;
 	private String email;
-	private String phonenum;
-	private String zipcode;
-	private String mainaddress;
-	private String detailaddress;
+	private String phoneNum;
+	private String zipCode;
+	private String mainAddress;
+	private String detailAddress;
 	private Date joindate;
+	private int point;
+	
+	// 사용된 포인트
+	
+	// 적립되는 포인트
 }
