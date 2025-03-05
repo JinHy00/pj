@@ -4,8 +4,8 @@ import java.util.Map;
 
 public interface AdminService {
 	// 로그인
-	String loginAdmin(String userid, String passwd);
+	String loginAdmin(String adminid, String passwd);
 
 	// 비밀번호 확인
-	int passwdCheck(String userid, String passwd);
+	int passwdCheck(String adminid, String passwd);
 }

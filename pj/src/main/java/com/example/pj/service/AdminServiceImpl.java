@@ -11,14 +11,14 @@ public class AdminServiceImpl implements AdminService {
 	AdminService adminService;
 		
 	@Override
-	public String loginAdmin(String userid, String passwd) {
-		String name = adminService.loginAdmin(userid, passwd);
+	public String loginAdmin(String adminid, String passwd) {
+		String name = adminService.loginAdmin(adminid, passwd);
 			return name;
 	}
 
 	@Override
-	public int passwdCheck(String userid, String passwd) {
-		int result = adminService.passwdCheck(userid, passwd);
+	public int passwdCheck(String adminid, String passwd) {
+		int result = adminService.passwdCheck(adminid, passwd);
 		return result;
 	}
 
