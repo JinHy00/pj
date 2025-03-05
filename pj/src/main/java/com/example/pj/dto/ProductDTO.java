@@ -2,9 +2,9 @@ package com.example.pj.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import groovy.transform.ToString;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -27,4 +27,21 @@ public class ProductDTO {
    
    // join column
    private String brandName;
+   
+   public ProductDTO(int productCode, int brandCode, String productName, int price, String description, 
+		           int amount, String capacity, String gender, String mainImage, String detailImage, 
+		           String brandName) {
+		this.productCode = productCode;
+		this.brandCode = brandCode;
+		this.productName = productName;
+		this.price = price;
+		this.description = description;
+		this.amount = amount;
+		this.capacity = capacity;
+		this.gender = gender;
+		this.mainImage = mainImage;
+		this.detailImage = detailImage;
+		this.brandName = brandName;
+	}
+
 }

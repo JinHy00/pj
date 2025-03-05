@@ -9,10 +9,10 @@ public interface ProductService {
       List<ProductDTO> list(String searchkey, String keyword);
       
       // 브랜드 상품리스트
-      List<ProductDTO> brand_list(int brandCode, String keyword);
+      List<ProductDTO> brandList(int brandCode, String keyword);
       
       // 카테고리(성별) 상품리스트
-      List<ProductDTO> gender_list(String gender, String searchkey, String keyword);
+      List<ProductDTO> genderList(String gender, String searchkey, String keyword);
 
       // 상품정보
       ProductDTO detail(int productCode);
@@ -24,7 +24,7 @@ public interface ProductService {
       void update(ProductDTO dto);
       
       // 상품삭제
-      void delete(int ProductCode);
+      void delete(int productCode);
       
       // 추가 안할 수도 
       // 이미지1

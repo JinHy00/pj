@@ -25,20 +25,20 @@ public class ProductServiceImpl implements ProductService {
    }
    
    @Override
-   public List<ProductDTO> brand_list(int brandCode, String keyword) {
+   public List<ProductDTO> brandList(int brandCode, String keyword) {
       Map<String, Object> map = new HashMap<>();
       map.put("keyword", keyword);
       map.put("brandCode", brandCode);
-      return productMapper.brand_list(map);
+      return productMapper.brandList(map);
    }
    
    @Override
-   public List<ProductDTO> gender_list(String gender,  String searchkey, String keyword) {
+   public List<ProductDTO> genderList(String gender,  String searchkey, String keyword) {
       Map<String, Object> map = new HashMap<>();
       map.put("searchkey", searchkey);
       map.put("keyword", keyword);
       map.put("gender", gender);
-      return productMapper.gender_list(map);
+      return productMapper.genderList(map);
    }
 
    @Override
@@ -60,8 +60,8 @@ public class ProductServiceImpl implements ProductService {
    }
 
    @Override
-   public void delete(int ProductCode) {
-      productMapper.delete(ProductCode);
+   public void delete(int productCode) {
+      productMapper.delete(productCode);
    }
 
    @Override

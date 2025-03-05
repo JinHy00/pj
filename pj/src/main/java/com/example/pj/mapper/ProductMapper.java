@@ -15,10 +15,10 @@ public interface ProductMapper {
       List<ProductDTO> list(Map<String, Object> map);
       
       // 브랜드 상품리스트
-      List<ProductDTO> brand_list(Map<String, Object> map);
+      List<ProductDTO> brandList(Map<String, Object> map);
       
       // 카테고리(성별) 상품리스트
-      List<ProductDTO> gender_list(Map<String, Object> map);
+      List<ProductDTO> genderList(Map<String, Object> map);
       
       // 상품정보
       ProductDTO detail(int productCode);
@@ -30,7 +30,7 @@ public interface ProductMapper {
       void update(ProductDTO dto);
       
       // 상품삭제
-      void delete(int ProductCode);
+      void delete(int productCode);
       
       // 이미지1
       String mainImg(int productCode);
