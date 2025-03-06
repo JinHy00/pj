@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 
 @Repository
 public class QnADAOImpl implements QnADAO {
@@ -22,7 +23,15 @@ public class QnADAOImpl implements QnADAO {
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchkey", searchkey);
 		map.put("search", search);
-		return sqlSession.selectList("qna.list", map);
+		return sqlSession.selectList("qna.qna_list", map);
+	}
+	
+	@Override
+	public List<QnAReplyDTO> reply_list(String searchkey, String search) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchkey", searchkey);
+		map.put("search", search);
+		return sqlSession.selectList("qna.reply_list", map);
 	}
 	
 	@Override
@@ -39,12 +48,22 @@ public class QnADAOImpl implements QnADAO {
 
 	@Override
 	public QnADTO qna_detail(int qnaCode) {
-		return sqlSession.selectOne("qna.detail", qnaCode);
+		return sqlSession.selectOne("qna.qna_detail", qnaCode);
+	}
+	
+	@Override
+	public QnAReplyDTO reply_detail(int qnaReplyCode) {
+		return sqlSession.selectOne("qna.reply_detail", qnaReplyCode);
 	}
 
 	@Override
 	public QnADTO qna_edit(int qnaCode) {
-		return sqlSession.selectOne("qna.edit", qnaCode);
+		return sqlSession.selectOne("qna.qna_edit", qnaCode);
+	}
+	
+	@Override
+	public QnAReplyDTO reply_edit(int qnaReplyCode) {
+		return sqlSession.selectOne("qna.reply_edit", qnaReplyCode);
 	}
 
 	@Override
@@ -59,7 +78,12 @@ public class QnADAOImpl implements QnADAO {
 
 	@Override
 	public void qna_delete(int qnaCode) {
-		sqlSession.delete("qna.delete", qnaCode);
+		sqlSession.delete("qna.qna_delete", qnaCode);
+	}
+	
+	@Override
+	public void reply_delete(int qnaReplyCode) {
+		sqlSession.delete("qna.reply_delete", qnaReplyCode);
 	}
 
 	@Override

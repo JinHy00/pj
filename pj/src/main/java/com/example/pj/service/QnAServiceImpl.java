@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.pj.dao.QnADAO;
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 
 @Service
 public class QnAServiceImpl implements QnAService {
@@ -18,8 +19,13 @@ public class QnAServiceImpl implements QnAService {
 	QnADAO qnaDao;
 	
 	@Override
-	public List<QnADTO> list(String searchkey, String search) {
+	public List<QnADTO> qna_list(String searchkey, String search) {
 		return qnaDao.qna_list(searchkey, search);
+	}
+	
+	@Override
+	public List<QnAReplyDTO> reply_list(String searchkey, String search) {
+		return qnaDao.reply_list(searchkey, search);
 	}
 	
 	@Transactional
@@ -35,13 +41,23 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public QnADTO detail(int qnaCode) {
+	public QnADTO qna_detail(int qnaCode) {
 		return qnaDao.qna_detail(qnaCode);
 	}
 	
 	@Override
-	public QnADTO edit(int qnaCode) {
+	public QnAReplyDTO reply_detail(int qnaReplyCode) {
+		return qnaDao.reply_detail(qnaReplyCode);
+	}
+	
+	@Override
+	public QnADTO qna_edit(int qnaCode) {
 		return qnaDao.qna_edit(qnaCode);
+	}
+	
+	@Override
+	public QnAReplyDTO reply_edit(int qnaReplyCode) {
+		return qnaDao.reply_edit(qnaReplyCode);
 	}
 	
 	@Transactional
@@ -57,8 +73,13 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public void delete(int qnaCode) {
+	public void qna_delete(int qnaCode) {
 		qnaDao.qna_delete(qnaCode);
+	}
+	
+	@Override
+	public void reply_delete(int qnaReplyCode) {
+		qnaDao.reply_delete(qnaReplyCode);
 	}
 	
 	@Override

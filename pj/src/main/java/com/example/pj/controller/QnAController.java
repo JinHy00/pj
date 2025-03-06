@@ -28,9 +28,14 @@ public class QnAController {
 	@Autowired
 	QnAService qnaService;
 	
-	@RequestMapping("/list")
+	@RequestMapping("/qna_list")
 	public List<QnADTO> qna_list(@RequestParam(name = "searchkey", defaultValue = "title") String searchkey, @RequestParam(name = "search", defaultValue = "") String search) {
-		return qnaService.list(searchkey, search);
+		return qnaService.qna_list(searchkey, search);
+	}
+	
+	@RequestMapping("/reply_list")
+	public List<QnAReplyDTO> reply_list(@RequestParam(name = "searchkey", defaultValue = "title") String searchkey, @RequestParam(name = "search", defaultValue = "") String search) {
+		return qnaService.reply_list(searchkey, search);
 	}
 	
 	@PostMapping("/qna_insert")
@@ -65,14 +70,24 @@ public class QnAController {
 		return qnaService.reply_insert(map);
 	}
 	
-	@GetMapping("/detail/{qnaCode}")
+	@GetMapping("/qna_detail/{qnaCode}")
 	public QnADTO qna_detail(@PathVariable(name = "qnaCode") int qnaCode) {
-		return qnaService.detail(qnaCode);	
+		return qnaService.qna_detail(qnaCode);	
 	}
 	
-	@GetMapping("/edit/{qnaCode}")
+	@GetMapping("/reply_detail/{qnaReplyCode}")
+	public QnAReplyDTO reply_detail(@PathVariable(name = "qnaReplyCode") int qnaReplyCode) {
+		return qnaService.reply_detail(qnaReplyCode);	
+	}
+	
+	@GetMapping("/qna_edit/{qnaCode}")
 	public QnADTO qna_edit(@PathVariable(name = "qnaCode") int qnaCode) {
-		return qnaService.edit(qnaCode);	
+		return qnaService.qna_edit(qnaCode);	
+	}
+	
+	@GetMapping("/reply_edit/{qnaReplyCode}")
+	public QnAReplyDTO reply_edit(@PathVariable(name = "qnaReplyCode") int qnaReplyCode) {
+		return qnaService.reply_edit(qnaReplyCode);	
 	}
 	
 	@PostMapping("/qna_update")
@@ -89,7 +104,7 @@ public class QnAController {
 			}
 		} else {
 			int qnaCode = dto.getQnaCode();
-			QnADTO qna = qnaService.detail(qnaCode);
+			QnADTO qna = qnaService.qna_detail(qnaCode);
 	        filename = qna.getQnaFile(); 
 		}
 		Map<String, Object> map = new HashMap<>();
@@ -111,8 +126,8 @@ public class QnAController {
 		qnaService.reply_update(map);
 	}
 	
-	@GetMapping("/delete/{qnaCode}")
-	public void delete(QnADTO dto, HttpServletRequest request) {
+	@GetMapping("/qna_delete/{qnaCode}")
+	public void qna_delete(QnADTO dto, HttpServletRequest request) {
 		String filename = dto.getQnaFile();
 		if (filename != null && !filename.equals("-")) {
 			String path = request.getSession().getServletContext().getRealPath("/images/");
@@ -122,7 +137,13 @@ public class QnAController {
 			}
 		}
 		int qnaCode = dto.getQnaCode();
-		qnaService.delete(qnaCode);
+		qnaService.qna_delete(qnaCode);
+	}
+	
+	@GetMapping("/reply_delete/{qnaReplyCode}")
+	public void reply_delete(QnAReplyDTO dto, HttpServletRequest request) {
+		int qnaReplyCode = dto.getQnaReplyCode();
+		qnaService.reply_delete(qnaReplyCode);
 	}
 	
 	@RequestMapping("/category")

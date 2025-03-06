@@ -10,7 +10,7 @@ import com.example.pj.dto.QnAReplyDTO;
 public interface QnADAO {
 	List<QnADTO> qna_list(String searchkey, String search);
 	
-	// List<QnAReplyDTO> reply_list(String searchkey, String search);
+	List<QnAReplyDTO> reply_list(String searchkey, String search);
 	
 	String qna_insert(Map<String, Object> map);
 	
@@ -18,11 +18,11 @@ public interface QnADAO {
 	
 	QnADTO qna_detail(int qnaCode);
 	
-	// QnAReplyDTO reply_detail(int qnaReplyCode);
+	QnAReplyDTO reply_detail(int qnaReplyCode);
 	
 	QnADTO qna_edit(int qnaCode);
 	
-	// QnAReplyDTO reply_edit(int qnaReplyCode);
+	QnAReplyDTO reply_edit(int qnaReplyCode);
 	
 	void qna_update(Map<String, Object> map);
 	
@@ -30,7 +30,7 @@ public interface QnADAO {
 	
 	void qna_delete(int qnaCode);
 	
-	// void reply_delete(int qnaReplyCode);
+	void reply_delete(int qnaReplyCode);
 	
 	String filename(int qnaCode);
 	
