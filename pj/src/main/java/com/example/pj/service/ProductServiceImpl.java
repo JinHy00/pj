@@ -15,7 +15,6 @@ public class ProductServiceImpl implements ProductService {
    @Autowired
    ProductMapper productMapper;
    
-   
    @Override
    public List<ProductDTO> list(String searchkey, String keyword) {
       Map<String, Object> map = new HashMap<>();
