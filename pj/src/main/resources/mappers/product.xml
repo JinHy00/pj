@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pj.mapper.ProductMapper">
-   <select id="list" resultType="com.example.pj.dto.ProductDTO">
-      select productCode, b.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-       from product p, brand b where p.brandCode = b.brandCode and
-      <if test="searchkey == 'all'">
-         b.brandName like concat ('%', #{keyword}, '%') or
-         productName  like concat ('%', #{keyword}, '%')
-      </if>
-      <if test="searchkey !='all'">
-         ${searchkey} like concat ('%', #{keyword}, '%')
-      </if>
-      order by productCode
-   </select>
-   <select id="barnd_list" resultType="com.example.pj.dto.ProductDTO">
-      select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-      from product p, brand b
-      where p.brandCode = b.brandCode and p.brandCode = #{brandCode}
-      and productName  like concat ('%', #{keyword}, '%')
-      order by productCode
-   </select>
-   <select id="gender_list" resultType="com.example.pj.dto.ProductDTO">
-      select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-      from product p, brand b where p.brandCode = b.brandCode and gender = #{gender} and
-      <if test="searchkey == 'all'">
-         b.brandName like concat ('%', #{keyword}, '%') or
-         productName  like concat ('%', #{keyword}, '%')
-      </if>
-      <if test="searchkey !='all'">
-         ${searchkey} like concat ('%', #{keyword}, '%')
-      </if>
-      order by productCode
-   </select>
+    <select id="list" resultType="com.example.pj.dto.ProductDTO">
+        select productCode, b.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        from product p, brand b where p.brandCode = b.brandCode and
+        <if test="searchkey == 'all'">
+            b.brandName like concat ('%', #{keyword}, '%') or
+            productName  like concat ('%', #{keyword}, '%')
+        </if>
+        <if test="searchkey !='all'">
+            ${searchkey} like concat ('%', #{keyword}, '%')
+        </if>
+        order by productCode
+    </select>
+
+    <select id="brand_list" resultType="com.example.pj.dto.ProductDTO">
+        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        from product p, brand b
+        where p.brandCode = b.brandCode and p.brandCode = #{brandCode}
+        and productName  like concat ('%', #{keyword}, '%')
+        order by productCode
+    </select>
+
+    <select id="gender_list" resultType="com.example.pj.dto.ProductDTO">
+        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        from product p, brand b where p.brandCode = b.brandCode and gender = #{gender} and
+        <if test="searchkey == 'all'">
+            b.brandName like concat ('%', #{keyword}, '%') or
+            productName  like concat ('%', #{keyword}, '%')
+        </if>
+        <if test="searchkey !='all'">
+            ${searchkey} like concat ('%', #{keyword}, '%')
+        </if>
+        order by productCode
+    </select>
    
-   <select id="detail" resultType="com.example.pj.dto.ProductDTO">
-      select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-      from product p, brand b where p.brandCode = b.brandCode and productCode = #{productCode}
-   </select>
+    <select id="detail" resultType="com.example.pj.dto.ProductDTO">
+        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        from product p, brand b where p.brandCode = b.brandCode and productCode = #{productCode}
+    </select>
       
-   <insert id="insert">
-      insert into product values 
-      (#{productCode}, #{brandCode}, #{productName}, #{price}, #{description}, #{amount}, #{capacity}, #{gender}, #{mainImage}, #{detailImage})
-   </insert>
+    <insert id="insert">
+        INSERT INTO product
+        (productCode, brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage)
+        VALUES
+        (#{productCode}, #{brandCode}, #{productName}, #{price}, #{description}, #{amount}, #{capacity}, #{gender}, #{mainImage}, #{detailImage})
+    </insert>
+    
+    <update id="update">
+        update product set productName = #{productName}, price = #{price}, description = #{description}, amount = #{amount}, capacity = #{capacity}, gender = #{gender}, mainImage = #{mainImage}, detailImage = #{detailImage}
+        where productCode = #{productCode}
+    </update>
    
-   <update id="update">
-      update product set productName = #{productName}, price = #{price}, description = #{description}, amount = #{amount}, capacity = #{capacity}, gender = #{gender}, mainImage = #{mainImage}, detailImage = #{detailImage}
-      where productCode = #{productCode}
-   </update>
-   
-   <delete id="delete">
-      delete from product where productCode = #{productCode}
-   </delete>
+    <delete id="delete">
+        delete from product where productCode = #{productCode}
+    </delete>
 </mapper>
