@@ -48,9 +48,15 @@
     </select>
    
     <select id="detail" resultType="com.example.pj.dto.ProductDTO">
-        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        select productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
         from product p, brand b where p.brandCode = b.brandCode and productCode = #{productCode}
     </select>
+    
+    <select id="edit" resultType="com.example.pj.dto.ProductDTO">
+        select productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+        from product p, brand b where p.brandCode = b.brandCode and productCode = #{productCode}
+    </select>
+   
    
     
     <update id="update">

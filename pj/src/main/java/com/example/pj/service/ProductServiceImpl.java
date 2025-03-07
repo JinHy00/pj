@@ -50,7 +50,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO detail(int productCode) {
         return productMapper.detail(productCode);
     }
-
+    
+    @Override
+    public ProductDTO edit(int productCode) {
+        return productMapper.edit(productCode);
+    }
+    
     @Override
     public void insert(ProductDTO dto) {
         productMapper.insert(dto);

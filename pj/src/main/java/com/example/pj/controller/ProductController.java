@@ -79,6 +79,12 @@ public class ProductController {
         return productService.detail(productCode);
     }
     
+    @GetMapping("edit/{productCode}")
+    public ProductDTO edit(@PathVariable(name = "productCode") int productCode) {
+        return productService.edit(productCode);
+    }
+    
+    
     @GetMapping("/brand_list")
     public List<BrandDTO> getBrands() {
         return productService.getAllBrands();

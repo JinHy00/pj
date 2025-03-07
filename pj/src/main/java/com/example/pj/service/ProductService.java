@@ -20,6 +20,8 @@ public interface ProductService {
     // 상품정보
     ProductDTO detail(int productCode);
     
+    ProductDTO edit(int productCode);
+    
     // 상품등록
     void insert(ProductDTO dto);
     
