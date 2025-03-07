@@ -41,7 +41,7 @@
 	</update>
 	
 	<delete id="delete">
-		delete from notice where noticeCode=${noticeCode} 
+		delete from notice where noticeCode=#{noticeCode} 
 	</delete>
 	
 	<select id="filename" resultType="String">

@@ -19,78 +19,44 @@ public class QnADAOImpl implements QnADAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<QnADTO> qna_list(String searchkey, String search) {
+	public List<QnADTO> list(String searchkey, String search) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchkey", searchkey);
 		map.put("search", search);
-		return sqlSession.selectList("qna.qna_list", map);
-	}
-	
-	@Override
-	public List<QnAReplyDTO> reply_list(String searchkey, String search) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("searchkey", searchkey);
-		map.put("search", search);
-		return sqlSession.selectList("qna.reply_list", map);
-	}
-	
-	@Override
-	public String qna_insert(Map<String, Object> map) {
-		sqlSession.insert("qna.qna_insert", map);
-		return "";	
-	}
-	
-	@Override
-	public String reply_insert(Map<String, Object> map) {
-		sqlSession.insert("qna.reply_insert", map);
-		return "";	
+		return sqlSession.selectList("qna.list", map);
 	}
 
 	@Override
-	public QnADTO qna_detail(int qnaCode) {
-		return sqlSession.selectOne("qna.qna_detail", qnaCode);
-	}
-	
-	@Override
-	public QnAReplyDTO reply_detail(int qnaReplyCode) {
-		return sqlSession.selectOne("qna.reply_detail", qnaReplyCode);
+	public String insert(Map<String, Object> map) { 
+		sqlSession.insert("qna.insert", map);	
+		return "";
 	}
 
 	@Override
-	public QnADTO qna_edit(int qnaCode) {
-		return sqlSession.selectOne("qna.qna_edit", qnaCode);
+	public QnADTO detail(int qnaCode) {
+		return sqlSession.selectOne("qna.edit", qnaCode);
 	}
 	
 	@Override
-	public QnAReplyDTO reply_edit(int qnaReplyCode) {
-		return sqlSession.selectOne("qna.reply_edit", qnaReplyCode);
+	public QnADTO edit(int qnaCode) {
+		return sqlSession.selectOne("qna.detail", qnaCode);
 	}
 
 	@Override
-	public void qna_update(Map<String, Object> map) {
-		sqlSession.update("qna.qna_update", map);
-	}
-	
-	@Override
-	public void reply_update(Map<String, Object> map) {
-		sqlSession.update("qna.reply_update", map);
+	public void update(Map<String, Object> map) {
+		sqlSession.update("qna.update", map);
 	}
 
 	@Override
-	public void qna_delete(int qnaCode) {
-		sqlSession.delete("qna.qna_delete", qnaCode);
-	}
-	
-	@Override
-	public void reply_delete(int qnaReplyCode) {
-		sqlSession.delete("qna.reply_delete", qnaReplyCode);
+	public void delete(int qnaCode) {
+		sqlSession.delete("qna.delete", qnaCode);
 	}
 
 	@Override
 	public String filename(int qnaCode) {
 		return sqlSession.selectOne("qna.filename", qnaCode);
 	}
-
+	
 	@Override
 	public List<QnACategoryDTO> category() {
 		return sqlSession.selectList("qna.category");

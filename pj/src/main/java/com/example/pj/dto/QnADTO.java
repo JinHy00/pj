@@ -18,6 +18,6 @@ public class QnADTO {
 	private String userid;
 	private int q_categoryCode;
 	private String q_categoryName;
-	private int qnaReplyCode;
 	private MultipartFile img;
+	private QnAReplyDTO qnaReply;
 }
