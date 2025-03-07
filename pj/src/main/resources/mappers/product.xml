@@ -59,11 +59,20 @@
    
    
     
-    <update id="update">
-        update product set productName = #{productName}, price = #{price}, description = #{description}, amount = #{amount}, capacity = #{capacity}, gender = #{gender}, mainImage = #{mainImage}, detailImage = #{detailImage}
-        where productCode = #{productCode}
-    </update>
-   
+   <update id="update">
+	    update product 
+	    set 
+	        productName = #{productName}, 
+	        price = #{price}, 
+	        description = #{description}, 
+	        amount = #{amount}, 
+	        capacity = #{capacity}, 
+	        gender = #{gender}, 
+	        mainImage = #{mainImage}, 
+	        detailImage = #{detailImage}
+	    where productCode = #{productCode}
+	</update>
+
     <delete id="delete">
         delete from product where productCode = #{productCode}
     </delete>

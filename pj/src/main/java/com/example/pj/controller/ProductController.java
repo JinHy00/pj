@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -147,9 +148,11 @@ public class ProductController {
 
     // 상품 수정
     @Transactional
-    @PostMapping("update")
-    public void update(ProductDTO dto, @RequestParam(name = "mainImg", required = false) MultipartFile mainImg,
+    @PostMapping("update/{productCode}")
+    public void update(@PathVariable Long productCode, ProductDTO dto,
+                       @RequestParam(name = "mainImg", required = false) MultipartFile mainImg,
                        @RequestParam(name = "detailImg", required = false) MultipartFile detailImg, HttpServletRequest request) {
+        
         String mainImage = dto.getMainImage();
         String detailImage = dto.getDetailImage();
 
@@ -184,18 +187,22 @@ public class ProductController {
             }
         }
 
+        // 기존 이미지를 유지
         dto.setMainImage(mainImage);
         dto.setDetailImage(detailImage);
+
         productService.update(dto);
     }
 
+
     // 상품 삭제
-    @PostMapping("delete")
-    public void delete(@RequestParam(name = "productCode") int productCode, HttpServletRequest request) {
+    @DeleteMapping("delete/{productCode}")
+    public void delete(@PathVariable("productCode") int productCode, HttpServletRequest request) {
         ProductDTO dto = productService.detail(productCode);
         String mainImage = dto.getMainImage();
         String detailImage = dto.getDetailImage();
 
+        // 이미지 파일 삭제
         ServletContext application = request.getSession().getServletContext();
         String path = application.getRealPath("/images/");
         File mf = new File(path + mainImage);
@@ -207,6 +214,8 @@ public class ProductController {
             df.delete();
         }
 
+        // 데이터베이스에서 상품 삭제
         productService.delete(productCode);
     }
+
 }
