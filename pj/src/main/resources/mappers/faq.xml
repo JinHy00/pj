@@ -15,8 +15,8 @@
     </select>
 
 	<insert id="insert">
-		insert into faq (faqTitle, faqContent, f_categoryCode) 
-		values (#{faqTitle},#{faqContent},#{f_categoryCode})
+		insert into faq (<!-- adminid, -->faqTitle, faqContent, f_categoryCode) 
+		values (<!-- adminid, -->#{faqTitle},#{faqContent},#{f_categoryCode})
 	</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.FAQDTO">

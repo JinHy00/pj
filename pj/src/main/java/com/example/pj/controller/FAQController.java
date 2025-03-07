@@ -31,6 +31,7 @@ public class FAQController {
 	public String faq_insert(FAQDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("faqCode", dto.getFaqCode());
+		map.put("adminid", dto.getAdminid());
 		map.put("faqTitle", dto.getFaqTitle());
 		map.put("faqContent", dto.getFaqContent());
 		map.put("f_categoryCode", dto.getF_categoryCode());
@@ -51,6 +52,7 @@ public class FAQController {
 	public void faq_update(FAQDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("faqCode", dto.getFaqCode());
+		map.put("adminid", dto.getAdminid());
 		map.put("faqTitle", dto.getFaqTitle());
 		map.put("faqContent", dto.getFaqContent());
 		map.put("f_categoryCode", dto.getF_categoryCode());

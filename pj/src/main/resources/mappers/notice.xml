@@ -5,7 +5,7 @@
 	<select id="list" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, noticeTitle, noticeContent, nc.n_categoryName, noticeDate, noticeFile
         from notice n
-        join n_category nc on n.n_categoryCode = nc.n_categoryCode
+        join n_category nc on n.n_categoryCode = nc.n_categoryCode 
         <where>
             <if test="searchkey != null and search != null and search != ''">
                 and ${searchkey} like concat('%', #{search}, '%')
@@ -14,8 +14,8 @@
         order by noticeDate desc
     </select>
 
-	<insert id="insert">insert into notice (noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
-		values (#{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
+	<insert id="insert">insert into notice (<!-- adminid, --> noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
+		values (<!-- #{adminid},--> #{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">
 		select noticeCode, nc.n_categoryName, noticeTitle, noticeContent, noticeDate, noticeFile
@@ -33,13 +33,15 @@
 	
 	<update id="update">
 		update notice 
-		set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent}, 
-			noticeFile=#{noticeFile}, n_categoryCode=#{n_categoryCode}
+		set noticeTitle=#{noticeTitle}, 
+			noticeContent=#{noticeContent}, 
+			noticeFile=#{noticeFile}, 
+			n_categoryCode=#{n_categoryCode}
 		where noticeCode=#{noticeCode}
 	</update>
 	
 	<delete id="delete">
-		delete from notice where noticeCode=${noticeCode}
+		delete from notice where noticeCode=${noticeCode} 
 	</delete>
 	
 	<select id="filename" resultType="String">
