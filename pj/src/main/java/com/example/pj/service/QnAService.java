@@ -3,35 +3,25 @@ package com.example.pj.service;
 import java.util.List;
 import java.util.Map;
 
+import com.example.pj.dto.NoticeCategoryDTO;
+import com.example.pj.dto.NoticeDTO;
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
 import com.example.pj.dto.QnAReplyDTO;
 
 public interface QnAService {
 	
-	List<QnADTO> qna_list(String searchkey, String search);
+	List<QnADTO> list(String searchkey, String search);
 	
-	List<QnAReplyDTO> reply_list(String searchkey, String search);
+	String insert(Map<String, Object> map);
 	
-	String qna_insert(Map<String, Object> map);
-	
-	String reply_insert(Map<String, Object> map);
-	
-	QnADTO qna_detail(int qnaCode);
-	
-	QnAReplyDTO reply_detail(int qnaReplyCode);
+	QnADTO detail(int qnaCode);
 
-	QnADTO qna_edit(int qnaCode);
+	QnADTO edit(int qnaCode);
 	
-	QnAReplyDTO reply_edit(int qnaReplyCode);
+	void update(Map<String, Object> map);
 	
-	void qna_update(Map<String, Object> map);
-	
-	void reply_update(Map<String, Object> map);
-	
-	void qna_delete(int qnaCode);
-
-	void reply_delete(int qnaReplyCode);
+	void delete(int qnaCode);
 	
 	String filename(int qnaCode);
 	

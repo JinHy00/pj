@@ -2,86 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
 
-	<select id="qna_list" resultType="com.example.pj.dto.QnADTO">
-		select qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile,
+    <select id="list" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile
         from qna q
-        join q_category qc on q.q_categoryCode = qc.q_categoryCode
+        join q_category qc on q.q_categoryCode = qc.q_categoryCode 
         <where>
             <if test="searchkey != null and search != null and search != ''">
-                and ${searchkey} like concat('%', #{search}, '%')
+                ${searchkey} like concat('%', #{search}, '%')
             </if>
         </where>
         order by qnaDate desc
     </select>
-    
-    <select id="reply_list" resultType="com.example.pj.dto.QnAReplyDTO">
-    	select q.qnaContent, qnaReplyCode, qnaReplyTitle, qnaReplyContent, qnaReplyDate
-    	from qnaReply qr
-    	join qna q on qr.qnaCode = q.qnCode
-    	<where>
-            <if test="searchkey != null and search != null and search != ''">
-                and ${searchkey} like concat('%', #{search}, '%')
-            </if>
-        </where>
-    </select>
 
-	<insert id="qna_insert">
-		insert into qna (qnaTitle, qnaContent, q_categoryCode, qnaFile) 
+	<insert id="insert">
+		insert into qna (qnaTitle,qnaContent,q_categoryCode,qnaFile) 
 		values (#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
 	</insert>
 	
-	<insert id="reply_insert">
-		insert into qnaReply (qnaCode, qnaReplyTitle, qnaReplyContent) 
-		values (#{qnaCode}, #{qnaReplyTitle}, #{qnaReplyContent})
-	</insert>
-	
-	<select id="qna_detail" resultType="com.example.pj.dto.QnADTO">
-		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile	   
+	<select id="detail" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
 		from qna q
 		join q_category qc on q.q_categoryCode = qc.q_categoryCode
 		where qnaCode=#{qnaCode}
 	</select>
 	
-	<select id="reply_detail" resultType="com.example.pj.dto.QnAReplyDTO">
-		select q.qnaContent, qnaReplyCode, qnaReplyTitle, qnaReplyContent, qnaReplyDate
-		from qnaReply qr
-		join qna q on qr.qnaCode = q.qnaCode
-		where qnaReplyCode=#{qnaReplyCode}
-	</select>
-	
-	<select id="qna_edit" resultType="com.example.pj.dto.QnADTO">
-		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile	   
+	<select id="edit" resultType="com.example.pj.dto.QnADTO">
+		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
 		from qna q
 		join q_category qc on q.q_categoryCode = qc.q_categoryCode
 		where qnaCode=#{qnaCode}
 	</select>
 	
-	<select id="reply_edit" resultType="com.example.pj.dto.QnAReplyDTO">
-		select q.qnaContent, qnaReplyCode, qnaReplyTitle, qnaReplyContent, qnaReplyDate
-		from qnaReply qr
-		join qna q on qr.qnaCode = q.qnaCode
-		where qnaReplyCode=#{qnaReplyCode}
-	</select>
-	
-	<update id="qna_update">
+	<update id="update">
 		update qna 
-		set qnaTitle=#{qnaTitle}, qnaContent=#{qnaContent}, 
-			qnaFile=#{qnaFile}, q_categoryCode=#{q_categoryCode}
+		set qnaTitle=#{qnaTitle}, 
+			qnaContent=#{qnaContent}, 
+			qnaFile=#{qnaFile}, 
+			q_categoryCode=#{q_categoryCode}
 		where qnaCode=#{qnaCode}
 	</update>
 	
-	<update id="reply_update">
-		update qnaReply
-		set qnaReplyTitle = #{qnaReplyTitle}, qnaReplyContent = #{qnaReplyContent} 
-		where qnaReplyCode = #{qnaReplyCode}
-	</update>
-	
-	<delete id="qna_delete">
-		delete from qna where qnaCode=${qnaCode}
-	</delete>
-	
-	<delete id="reply_delete">
-		delete from qnaReply where qnaReplyCode=${qnaReplyCode}
+	<delete id="delete">
+		delete from qna where qnaCode=#{qnaCode} 
 	</delete>
 	
 	<select id="filename" resultType="String">
@@ -94,4 +56,5 @@
 		select q_categoryCode, q_categoryName 
 		from q_category
 	</select>
+
 </mapper>

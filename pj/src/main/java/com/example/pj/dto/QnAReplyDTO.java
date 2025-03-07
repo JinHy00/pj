@@ -15,4 +15,5 @@ public class QnAReplyDTO {
 	private String qnaReplyTitle;
 	private String qnaReplyContent;
 	private Date qnaReplyDate;
+	private String adminid;
 }
