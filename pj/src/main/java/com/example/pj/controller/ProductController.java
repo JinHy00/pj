@@ -12,21 +12,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.pj.dto.BrandDTO;
 import com.example.pj.dto.ProductDTO;
 import com.example.pj.service.ProductService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 @RestController
 @RequestMapping("/api/product/")
 public class ProductController {
+
     @Autowired
     ProductService productService;
 
@@ -77,12 +78,18 @@ public class ProductController {
     public ProductDTO detail(@PathVariable(name = "productCode") int productCode) {
         return productService.detail(productCode);
     }
+    
+    @GetMapping("/brand_list")
+    public List<BrandDTO> getBrands() {
+        return productService.getAllBrands();
+    }
 
     // 상품 등록
     @Transactional
     @PostMapping("insert")
-    public void insert(ProductDTO dto, @RequestParam(name = "mainImg") MultipartFile mainImg,
-                       @RequestParam(name = "detailImg") MultipartFile detailImg, HttpServletRequest request) {
+    public Map<String, Object> insert(ProductDTO dto, @RequestParam(name = "mainImg") MultipartFile mainImg,
+                                       @RequestParam(name = "detailImg") MultipartFile detailImg, HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
         String mainImage = "";
         String detailImage = "";
 
@@ -119,7 +126,17 @@ public class ProductController {
 
         dto.setMainImage(mainImage);
         dto.setDetailImage(detailImage);
-        productService.insert(dto);
+        dto.setBrandName(request.getParameter("brandName"));
+
+        try {
+            productService.insert(dto);
+            response.put("success", true);  // 상품 등록 성공
+        } catch (Exception e) {
+            response.put("success", false);  // 상품 등록 실패
+            e.printStackTrace();
+        }
+
+        return response;
     }
 
     // 상품 수정

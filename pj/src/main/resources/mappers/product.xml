@@ -2,17 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pj.mapper.ProductMapper">
     <select id="list" resultType="com.example.pj.dto.ProductDTO">
-        select productCode, b.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-        from product p, brand b where p.brandCode = b.brandCode and
-        <if test="searchkey == 'all'">
-            b.brandName like concat ('%', #{keyword}, '%') or
-            productName  like concat ('%', #{keyword}, '%')
-        </if>
-        <if test="searchkey !='all'">
-            ${searchkey} like concat ('%', #{keyword}, '%')
-        </if>
-        order by productCode
+	    select productCode, b.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+	    from product p, brand b where p.brandCode = b.brandCode and
+	    <if test="searchkey == 'all'">
+	        b.brandName like concat ('%', #{keyword}, '%') or
+	        productName  like concat ('%', #{keyword}, '%')
+	    </if>
+	    <if test="searchkey !='all'">
+	        ${searchkey} like concat ('%', #{keyword}, '%')
+	    </if>
+	    order by productCode
+	</select>
+	
+	<insert id="insert">
+	    INSERT INTO product
+	    (brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage)
+	    VALUES
+	    (#{brandCode}, #{productName}, #{price}, #{description}, #{amount}, #{capacity}, #{gender}, #{mainImage}, #{detailImage})
+	</insert>
+	
+	<select id="getAllBrands" resultType="com.example.pj.dto.BrandDTO">
+        SELECT * FROM brand
     </select>
+
 
     <select id="brand_list" resultType="com.example.pj.dto.ProductDTO">
         select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
@@ -39,13 +51,7 @@
         select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
         from product p, brand b where p.brandCode = b.brandCode and productCode = #{productCode}
     </select>
-      
-    <insert id="insert">
-        INSERT INTO product
-        (productCode, brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage)
-        VALUES
-        (#{productCode}, #{brandCode}, #{productName}, #{price}, #{description}, #{amount}, #{capacity}, #{gender}, #{mainImage}, #{detailImage})
-    </insert>
+   
     
     <update id="update">
         update product set productName = #{productName}, price = #{price}, description = #{description}, amount = #{amount}, capacity = #{capacity}, gender = #{gender}, mainImage = #{mainImage}, detailImage = #{detailImage}

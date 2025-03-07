@@ -1,6 +1,8 @@
 package com.example.pj.service;
 
 import java.util.List;
+
+import com.example.pj.dto.BrandDTO;
 import com.example.pj.dto.ProductDTO;
 
 public interface ProductService {
@@ -12,6 +14,8 @@ public interface ProductService {
     
     // 카테고리(성별) 상품리스트
     List<ProductDTO> genderList(String gender, String searchkey, String keyword);
+    
+    List<BrandDTO> getAllBrands();
 
     // 상품정보
     ProductDTO detail(int productCode);

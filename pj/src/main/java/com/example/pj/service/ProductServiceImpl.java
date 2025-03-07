@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pj.dto.BrandDTO;
 import com.example.pj.dto.ProductDTO;
 import com.example.pj.mapper.ProductMapper;
 
@@ -38,6 +39,11 @@ public class ProductServiceImpl implements ProductService {
         map.put("keyword", keyword);
         map.put("gender", gender);
         return productMapper.genderList(map);
+    }
+    
+    @Override
+    public List<BrandDTO> getAllBrands() {
+        return productMapper.getAllBrands();
     }
 
     @Override

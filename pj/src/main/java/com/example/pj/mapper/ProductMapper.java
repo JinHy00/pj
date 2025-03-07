@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.pj.dto.BrandDTO;
 import com.example.pj.dto.ProductDTO;
 
 // MAPPER => DAO 대신 사용, DAO 구현하는 DAOImpl 생성 안하고 mybatis 랑 연결
@@ -19,6 +20,8 @@ public interface ProductMapper {
       
       // 카테고리(성별) 상품리스트
       List<ProductDTO> genderList(Map<String, Object> map);
+      
+      List<BrandDTO> getAllBrands();
       
       // 상품정보
       ProductDTO detail(int productCode);

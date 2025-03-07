@@ -26,6 +26,10 @@ public class ProductDTO {
 
     // join column
     private String brandName;
+    
+    public ProductDTO() {
+    }
+
 
     public ProductDTO(int productCode, int brandCode, String productName, int price, String description, 
                 int amount, String capacity, String gender, String mainImage, String detailImage, 
