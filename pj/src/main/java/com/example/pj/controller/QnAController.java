@@ -44,7 +44,7 @@ public class QnAController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", dto.getQnaCode());
-		// map.put("adminid", dto.getAdminid());
+		// map.put("userid", dto.getUserid());
 		map.put("qnaTitle", dto.getQnaTitle());
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());
@@ -81,7 +81,7 @@ public class QnAController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", dto.getQnaCode());
-		// map.put("adminid", dto.getAdminid());
+		// map.put("userid", dto.getUserid());
 		map.put("qnaTitle", dto.getQnaTitle());
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());

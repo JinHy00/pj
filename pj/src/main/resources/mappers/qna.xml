@@ -15,8 +15,8 @@
     </select>
 
 	<insert id="insert">
-		insert into qna (qnaTitle,qnaContent,q_categoryCode,qnaFile) 
-		values (#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
+		insert into qna (<!-- userid,-->qnaTitle,qnaContent,q_categoryCode,qnaFile) 
+		values (<!-- #{userid},-->#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
 	</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
