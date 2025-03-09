@@ -149,49 +149,55 @@ public class ProductController {
     // 상품 수정
     @Transactional
     @PostMapping("update/{productCode}")
-    public void update(@PathVariable Long productCode, ProductDTO dto,
-                       @RequestParam(name = "mainImg", required = false) MultipartFile mainImg,
-                       @RequestParam(name = "detailImg", required = false) MultipartFile detailImg, HttpServletRequest request) {
-        
-        String mainImage = dto.getMainImage();
-        String detailImage = dto.getDetailImage();
+    public Map<String, Object> update(@PathVariable("productCode") int productCode, ProductDTO dto,
+                                      @RequestParam(name = "mainImg", required = false) MultipartFile mainImg,
+                                      @RequestParam(name = "detailImg", required = false) MultipartFile detailImg,
+                                      HttpServletRequest request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // 기존 이미지 경로 (기존 값을 사용)
+            String mainImage = dto.getMainImage();  // 기존 이미지
+            String detailImage = dto.getDetailImage();  // 기존 이미지
 
-        // 파일 업로드 처리
-        if (mainImg != null && !mainImg.isEmpty()) {
-            mainImage = UUID.randomUUID().toString() + "_" + mainImg.getOriginalFilename();
-            try {
-                ServletContext application = request.getSession().getServletContext();
-                String path = application.getRealPath("/images/");
+            // mainImg 파일 업로드 처리
+            if (mainImg != null && !mainImg.isEmpty()) {
+                mainImage = UUID.randomUUID().toString() + "_" + mainImg.getOriginalFilename();
+                String path = request.getServletContext().getRealPath("/images/");
                 File directory = new File(path);
                 if (!directory.exists()) {
                     directory.mkdirs(); // 디렉토리가 없으면 생성
                 }
                 mainImg.transferTo(new File(path + File.separator + mainImage));
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-        }
 
-        if (detailImg != null && !detailImg.isEmpty()) {
-            detailImage = UUID.randomUUID().toString() + "_" + detailImg.getOriginalFilename();
-            try {
-                ServletContext application = request.getSession().getServletContext();
-                String path = application.getRealPath("/images/");
+            // detailImg 파일 업로드 처리
+            if (detailImg != null && !detailImg.isEmpty()) {
+                detailImage = UUID.randomUUID().toString() + "_" + detailImg.getOriginalFilename();
+                String path = request.getServletContext().getRealPath("/images/");
                 File directory = new File(path);
                 if (!directory.exists()) {
                     directory.mkdirs(); // 디렉토리가 없으면 생성
                 }
                 detailImg.transferTo(new File(path + File.separator + detailImage));
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+
+            // 파일 경로를 DTO에 세팅
+            dto.setMainImage(mainImage);  // mainImage가 null이 아닌 값으로 설정됨
+            dto.setDetailImage(detailImage);  // detailImage도 null이 아닌 값으로 설정됨
+
+            // 상품 수정 서비스 호출
+            productService.update(dto);
+
+            // 성공 응답 반환
+            response.put("success", true);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 실패 응답 반환
+            response.put("success", false);
+            response.put("message", "상품 수정 중 오류가 발생했습니다.");
+            return response;
         }
-
-        // 기존 이미지를 유지
-        dto.setMainImage(mainImage);
-        dto.setDetailImage(detailImage);
-
-        productService.update(dto);
     }
 
 
