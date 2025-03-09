@@ -109,9 +109,9 @@ public class QnAController {
 		return qnaService.category();
 	}
 	
-	@RequestMapping("/reply_list/{q_replyCode}")
-	public QnAReplyDTO reply_list(@PathVariable(name = "q_replyCode") int q_replyCode) {
-		return qnaService.reply_list(q_replyCode);
+	@RequestMapping("/reply_list/{qnaCode}")
+	public QnAReplyDTO reply_list(@PathVariable(name = "qnaCode") int qnaCode) {
+		return qnaService.reply_list(qnaCode);
 	}
 	
 	@PostMapping("/reply_write/{qnaCode}")

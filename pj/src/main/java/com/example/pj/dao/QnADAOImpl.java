@@ -63,8 +63,8 @@ public class QnADAOImpl implements QnADAO {
 	}
 	
 	@Override
-	public QnAReplyDTO reply_list(int q_replyCode) {
-		return sqlSession.selectOne("qna.reply_list", q_replyCode);
+	public QnAReplyDTO reply_list(int qnaCode) {
+		return sqlSession.selectOne("qna.reply_list", qnaCode);
 	}
 	
 	@Override

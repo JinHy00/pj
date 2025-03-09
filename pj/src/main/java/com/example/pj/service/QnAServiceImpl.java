@@ -61,8 +61,8 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public QnAReplyDTO reply_list(int q_replyCode) {
-		return qnaDao.reply_list(q_replyCode);
+	public QnAReplyDTO reply_list(int qnaCode) {
+		return qnaDao.reply_list(qnaCode);
 	}
 	
 	@Override
