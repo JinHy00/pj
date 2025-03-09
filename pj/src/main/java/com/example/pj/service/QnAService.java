@@ -26,4 +26,8 @@ public interface QnAService {
 	String filename(int qnaCode);
 	
 	List<QnACategoryDTO> category();
+	
+	QnAReplyDTO reply_list(int q_replyCode);
+	
+	String reply_write(Map<String, Object> map);
 }

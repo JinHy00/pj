@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 
 public interface QnADAO {
 	List<QnADTO> list(String searchkey, String search);
@@ -22,4 +23,8 @@ public interface QnADAO {
 	String filename(int qnaCode);
 	
 	List<QnACategoryDTO> category();
+	
+	QnAReplyDTO reply_list(int q_replyCode);
+	
+	String reply_write(Map<String, Object> map);
 }

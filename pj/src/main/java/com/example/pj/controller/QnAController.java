@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.pj.dto.QnADTO;
+import com.example.pj.dto.QnAReplyDTO;
 import com.example.pj.dto.QnACategoryDTO;
 import com.example.pj.service.QnAService;
 
@@ -106,5 +107,20 @@ public class QnAController {
 	@RequestMapping("/category")
 	public List<QnACategoryDTO> category() {
 		return qnaService.category();
+	}
+	
+	@RequestMapping("/reply_list/{q_replyCode}")
+	public QnAReplyDTO reply_list(@PathVariable(name = "q_replyCode") int q_replyCode) {
+		return qnaService.reply_list(q_replyCode);
+	}
+	
+	@PostMapping("/reply_write/{qnaCode}")
+	public String reply_write(@PathVariable(name = "qnaCode") int qnaCode, QnAReplyDTO dto) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaCode", qnaCode);
+		// map.put("adminid", dto.getAdminid());
+		map.put("q_replyContent", dto.getQ_replyContent());
+		map.put("q_replyCode", qnaCode);
+		return qnaService.reply_write(map);
 	}
 }

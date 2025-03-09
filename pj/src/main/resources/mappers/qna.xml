@@ -19,6 +19,18 @@
 		values (<!-- #{userid},-->#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
 	</insert>
 	
+	<insert id="reply_write">
+		insert into q_reply (qnaCode, q_replyCode, q_replyContent) 
+		values (#{qnaCode},#{qnaCode},#{q_replyContent})
+	</insert>
+	
+	<select id="reply_list" resultType="com.example.pj.dto.QnAReplyDTO">
+		select qnaCode, q_replyCode, q_replyContent, q_replyDate
+		from q_reply qr
+		join qna q on q.qnaCode = qr.qnaCode
+		where qr.q_replyCode=#{q_replyCode}
+	</select>
+	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
 		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
 		from qna q
