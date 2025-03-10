@@ -63,13 +63,18 @@ public class QnADAOImpl implements QnADAO {
 	}
 	
 	@Override
-	public QnAReplyDTO reply_list(int qnaCode) {
-		return sqlSession.selectOne("qna.reply_list", qnaCode);
+	public List<QnAReplyDTO> reply_list(int qnaCode) {
+		return sqlSession.selectList("qna.reply_list", qnaCode);
 	}
 	
 	@Override
 	public String reply_write(Map<String, Object> map) {
 		sqlSession.insert("qna.reply_write", map);	
 		return "";
+	}
+	
+	@Override
+	public void reply_update(Map<String, Object> map) {
+		sqlSession.update("qna.reply_update", map);
 	}
 }

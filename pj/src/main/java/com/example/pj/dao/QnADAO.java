@@ -24,7 +24,9 @@ public interface QnADAO {
 	
 	List<QnACategoryDTO> category();
 	
-	QnAReplyDTO reply_list(int qnaCode);
+	List<QnAReplyDTO> reply_list(int qnaCode);
 	
 	String reply_write(Map<String, Object> map);
+	
+	void reply_update(Map<String, Object> map);
 }

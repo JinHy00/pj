@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +18,9 @@ import com.example.pj.service.QnAService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/qna")
@@ -110,7 +114,7 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/reply_list/{qnaCode}")
-	public QnAReplyDTO reply_list(@PathVariable(name = "qnaCode") int qnaCode) {
+	public List<QnAReplyDTO> reply_list(@PathVariable(name = "qnaCode") int qnaCode) {
 		return qnaService.reply_list(qnaCode);
 	}
 	
@@ -122,5 +126,15 @@ public class QnAController {
 		map.put("q_replyContent", dto.getQ_replyContent());
 		map.put("q_replyCode", qnaCode);
 		return qnaService.reply_write(map);
+	}
+	
+	@PostMapping("/reply_update")
+	public void reply_update(QnAReplyDTO dto) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("qnaCode", dto.getQnaCode());
+		// map.put("adminid", dto.getAdminid());
+		map.put("q_replyContent", dto.getQ_replyContent());
+		map.put("q_replyCode", dto.getQ_replyCode());
+		qnaService.reply_update(map);
 	}
 }

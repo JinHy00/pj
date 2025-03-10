@@ -15,6 +15,7 @@ public class QnAReplyDTO {
 	private String q_replyContent;
 	private Date q_replyDate;
 	private String adminid;
+	
 	public int getQ_replyCode() {
 		return q_replyCode;
 	}

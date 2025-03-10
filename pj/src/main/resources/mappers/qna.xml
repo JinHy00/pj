@@ -25,10 +25,10 @@
 	</insert>
 	
 	<select id="reply_list" resultType="com.example.pj.dto.QnAReplyDTO">
-		select qnaCode, q_replyCode, q_replyContent, q_replyDate
+		select q.qnaCode, q_replyCode, q_replyContent, q_replyDate
 		from q_reply qr
 		join qna q on q.qnaCode = qr.qnaCode
-		where qr.q_replyCode=#{q_replyCode}
+		where q.qnaCode=#{qnaCode}
 	</select>
 	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
@@ -68,5 +68,10 @@
 		select q_categoryCode, q_categoryName 
 		from q_category
 	</select>
-
+	
+	<update id="reply_update">
+		update q_reply
+		set q_replyContent=#{q_replyContent} 
+		where qnaCode=#{qnaCode}
+	</update>
 </mapper>

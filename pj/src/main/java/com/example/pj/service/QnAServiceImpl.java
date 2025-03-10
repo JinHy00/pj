@@ -61,12 +61,18 @@ public class QnAServiceImpl implements QnAService {
 	}
 	
 	@Override
-	public QnAReplyDTO reply_list(int qnaCode) {
+	public List<QnAReplyDTO> reply_list(int qnaCode) {
 		return qnaDao.reply_list(qnaCode);
 	}
 	
 	@Override
 	public String reply_write(Map<String, Object> map) {
 		return qnaDao.reply_write(map);
+	}
+	
+	@Transactional
+	@Override
+	public void reply_update(Map<String, Object> map) {
+		qnaDao.reply_update(map);
 	}
 }
