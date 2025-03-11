@@ -10,17 +10,19 @@
 
     <!-- 장바구니 목록 조회 -->
     <select id="getCartList" resultType="com.example.pj.dto.CartDTO">
-        SELECT c.cartCode, c.userid, c.productCode, c.selectedCapacity, c.cartAmount, c.finalPrice,
-               p.productName, p.mainImage
-        FROM cart c
-        JOIN product p ON c.productCode = p.productCode
-        WHERE c.userid = #{userId}
+       SELECT c.cartCode, c.userid, c.productCode, c.selectedCapacity, c.cartAmount, 
+       (p.price * c.cartAmount) AS finalPrice, p.productName, p.mainImage, p.price
+		FROM cart c
+		JOIN product p ON c.productCode = p.productCode
+		WHERE c.userid = #{userId};
+
     </select>
 
     <!-- 장바구니 항목 삭제 -->
     <delete id="removeFromCart">
-        DELETE FROM cart WHERE cartCode = #{cartCode}
-    </delete>
+    	DELETE FROM cart WHERE cartCode = #{cartCode}
+	</delete>
+
 
     <!-- 장바구니 전체 삭제 -->
     <delete id="removeAllFromCart">

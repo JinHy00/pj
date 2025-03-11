@@ -34,14 +34,14 @@ public class CartController {
     }
 
     // 장바구니 항목 삭제
-    @DeleteMapping("/remove")
-    public void removeFromCart(@RequestParam int cartCode) {
+    @DeleteMapping("/remove/{cartCode}")
+    public void removeFromCart(@PathVariable(name = "cartCode") int cartCode) {
         cartService.removeFromCart(cartCode);
     }
 
     // 장바구니 전체 삭제
     @DeleteMapping("/remove/all")
-    public void removeAllFromCart(@RequestParam String userId) {
+    public void removeAllFromCart(@RequestParam(name = "userId") String userId) {
         cartService.removeAllFromCart(userId);
     }
 

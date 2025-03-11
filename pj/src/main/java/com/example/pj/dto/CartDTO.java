@@ -16,4 +16,5 @@ public class CartDTO {
     private int finalPrice;
     private String productName;
     private String mainImage;
+    private int price; 
 }

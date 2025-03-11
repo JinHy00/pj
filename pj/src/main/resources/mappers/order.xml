@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pj.mapper.OrderMapper">
+
+    <!-- 주문 목록 조회 -->
+    <select id="getOrderList" parameterType="String" resultType="com.example.pj.dto.OrderDTO">
+        SELECT * FROM orders WHERE user_id = #{userId}
+    </select>
+
+    <!-- 주문 상세 조회 -->
+    <select id="getOrderDetail" parameterType="int" resultType="com.example.pj.dto.OrderDTO">
+        SELECT * FROM orders WHERE order_code = #{orderCode}
+    </select>
+
+    <!-- 주문 생성 -->
+    <insert id="createOrder" parameterType="com.example.pj.dto.OrderDTO">
+        INSERT INTO orders (user_id, coupon_id, product_code, order_amount, recipient, rec_phone_num, zip_code, main_address, detail_address, order_date)
+        VALUES (#{userId}, #{couponId}, #{productCode}, #{orderAmount}, #{recipient}, #{recPhoneNum}, #{zipCode}, #{mainAddress}, #{detailAddress}, NOW())
+    </insert>
+
+    <!-- 주문 취소 -->
+    <update id="cancelOrder" parameterType="map">
+        UPDATE orders SET status = '취소요청', cancel_reason = #{cancelReason} WHERE order_code = #{orderCode}
+    </update>
+
+    <!-- 주문 상태 변경 -->
+    <update id="changeOrderStatus" parameterType="map">
+        UPDATE orders SET status = #{status} WHERE order_code = #{orderCode}
+    </update>
+
+    <!-- 주문 상세 정보 조회 -->
+    <select id="getOrderDetails" parameterType="int" resultType="com.example.pj.dto.OrderDetailDTO">
+        SELECT p.product_code, p.product_name, p.price, od.amount, (od.amount * p.price) AS money
+        FROM order_details od
+        JOIN products p ON od.product_code = p.product_code
+        WHERE od.order_code = #{orderCode}
+    </select>
+
+</mapper>
