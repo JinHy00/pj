@@ -32,7 +32,9 @@
     <select id="getOrderDetails" parameterType="int" resultType="com.example.pj.dto.OrderDetailDTO">
         SELECT p.product_code, p.product_name, p.price, od.amount, (od.amount * p.price) AS money
         FROM order_details od
-        JOIN products p ON od.product_code = p.product_code
+        JOIN products p ON o 
+        
+        d.product_code = p.product_code
         WHERE od.order_code = #{orderCode}
     </select>
 

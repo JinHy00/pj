@@ -31,15 +31,16 @@ public class ProductServiceImpl implements ProductService {
         map.put("brandCode", brandCode);
         return productMapper.brandList(map);
     }
-    
+
     @Override
-    public List<ProductDTO> genderList(String gender,  String searchkey, String keyword) {
+    public List<ProductDTO> genderList(String gender, String searchkey, String keyword) {
         Map<String, Object> map = new HashMap<>();
         map.put("searchkey", searchkey);
         map.put("keyword", keyword);
         map.put("gender", gender);
         return productMapper.genderList(map);
     }
+
     
     @Override
     public List<BrandDTO> getAllBrands() {

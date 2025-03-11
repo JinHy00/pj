@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pj.dto.OrderDTO;
-import com.example.pj.dto.OrderDetailDTO;
 import com.example.pj.mapper.OrderMapper;
 
 @Service

@@ -46,12 +46,12 @@ public class ProductController {
         return map;
     }
 
-    @RequestMapping(value = "list/{brandCode}", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> list_brand(@RequestParam(name = "keyword") String keyword,
+    @RequestMapping(value = "list/brand/{brandCode}", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> list_brand(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                           @PathVariable(name = "brandCode") int brandCode) {
         Map<String, Object> map = new HashMap<>();
         List<ProductDTO> list = productService.brandList(brandCode, keyword);
-        if (list == null) {
+        if (list == null || list.isEmpty()) {
             map.put("message", "등록된 상품이 없습니다.");
         } else {
             map.put("list", list);
@@ -60,13 +60,13 @@ public class ProductController {
         return map;
     }
 
-    @RequestMapping(value = "list/{gender}", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "list/gender/{gender}", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> list_gender(@RequestParam(name = "searchkey", defaultValue = "all") String searchkey,
                                            @RequestParam(name = "keyword", defaultValue = "") String keyword,
                                            @PathVariable(name = "gender") String gender) {
         Map<String, Object> map = new HashMap<>();
         List<ProductDTO> list = productService.genderList(gender, searchkey, keyword);
-        if (list == null) {
+        if (list == null || list.isEmpty()) {
             map.put("message", "등록된 상품이 없습니다.");
         } else {
             map.put("list", list);
@@ -74,6 +74,7 @@ public class ProductController {
         map.put("keyword", keyword);
         return map;
     }
+
 
     @GetMapping("detail/{productCode}")
     public ProductDTO detail(@PathVariable(name = "productCode") int productCode) {
