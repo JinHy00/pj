@@ -15,10 +15,12 @@ public class OrderDTO {
     private int couponId;
     private int productCode;
     private int orderAmount;
+    private Date orderDate;
     private String recipient;
     private String recPhoneNum;
     private String zipCode;
     private String mainAddress;
     private String detailAddress;
-    private Date orderDate;
+    private String status;
+    private String cancelReason;
 }

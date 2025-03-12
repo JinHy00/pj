@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.pj.dto.OrderDTO;
+import com.example.pj.dto.OrderDetailDTO;
 import com.example.pj.mapper.OrderMapper;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-	@Autowired
-    private OrderMapper orderMapper;
+
+    @Autowired
+    OrderMapper orderMapper;
 
     @Override
     public List<OrderDTO> getOrderList(String userId) {
@@ -24,22 +26,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void createOrder(OrderDTO orderDTO) {
-        orderMapper.createOrder(orderDTO);
+    public void createOrder(OrderDTO order) {
+        orderMapper.createOrder(order);
+    }
+
+    @Override
+    public void updateOrderStatus(int orderCode, String status) {
+        orderMapper.updateOrderStatus(orderCode, status);
     }
 
     @Override
     public void cancelOrder(int orderCode, String cancelReason) {
         orderMapper.cancelOrder(orderCode, cancelReason);
-    }
-
-    @Override
-    public void changeOrderStatus(int orderCode, String status) {
-        orderMapper.changeOrderStatus(orderCode, status);
-    }
-
-    @Override
-    public List<OrderDetailDTO> getOrderDetails(int orderCode) {
-        return orderMapper.getOrderDetails(orderCode);
     }
 }
