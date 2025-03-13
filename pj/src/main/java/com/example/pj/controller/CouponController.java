@@ -1,19 +1,26 @@
 package com.example.pj.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.pj.dto.CouponDTO;
 import com.example.pj.dto.CouponDetailDTO;
 import com.example.pj.service.CouponDetailService;
 import com.example.pj.service.CouponService;
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +39,33 @@ public class CouponController {
 	
 	
 	@PostMapping("insert")
-	public void insert(CouponDTO dto) {
-		couponService.insert(dto);
+	public Map<String, Object> insert(CouponDTO dto, @RequestParam(name = "couponImgURL") MultipartFile couponImgURL, HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<>();
+		String couponImage = "";
+		if(couponImgURL != null && !couponImgURL.isEmpty()) {
+			couponImage = UUID.randomUUID().toString() + "_" + couponImgURL.getOriginalFilename();
+			try {
+				ServletContext application = request.getSession().getServletContext();
+				String path = application.getRealPath("/images/coupon/");
+				File directory = new File(path);
+				if(!directory.exists()) {
+					directory.mkdirs();
+				}
+				couponImgURL.transferTo(new File(path + File.separator + couponImage));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		dto.setCouponImage(couponImage);
+		try {
+			couponService.insert(dto);
+			map.put("message", "success");
+		} catch (Exception e) {
+			map.put("message", "error");
+			e.printStackTrace();
+		}
+		return map;
 	}
 	
 	// userid, couponCode 를 경로로 보낼지 파라미터로 보낼지
