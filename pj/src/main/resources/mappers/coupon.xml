@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pj.mapper.CouponMapper">
+	<select id="couponList" resultType="com.example.pj.dto.CouponDTO">
+		select * from coupon order by couponCode
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from coupon where couponCode = #{couponCode}
+	</select>
+	
+	<update id="downCount">
+		update coupon set couponCount = couponCount - 1 where couponCode = #{couponCode}
+	</update>
+	
+	<insert id="insert">
+		insert into coupon (couponName, couponPrice, couponCount, couponImage)
+		values (#{couponName}, #{couponPrice}, #{couponCount}, #{couponImage})
+	</insert>
+	
+	<!-- 삭제하면 detail 도 삭제되도록 제약조건 설정  -->
+	<delete id="delete">
+		delete from coupon where couponCode = #{couponCode}
+	</delete>
+</mapper>

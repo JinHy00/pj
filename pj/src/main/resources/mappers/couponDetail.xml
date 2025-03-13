@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pj.mapper.CouponDetailMapper">
+	<insert id="downloadCoupon">
+		insert into couponDetail (couponCode, userid)
+		values (#{couponCode}, #{userid})
+	</insert>
+	
+	<select id="downloadList" resultType="com.example.pj.dto.CouponDetailDTO">
+		select couponid, cd.couponCode, couponName, couponPrice, couponImage 
+		from couponDetail cd, coupon c
+		where cd.couponCode = c.couponCode and userid = {userid}
+	</select>
+	
+	<select id="unusedList" resultType="com.example.pj.dto.CouponDetailDTO">
+		select couponid, cd.couponCode, couponName, couponPrice, couponImage 
+		from couponDetail cd, coupon c
+		where cd.couponCode = c.couponCode and userid = {userid} and couponState = 0
+	</select>
+	
+	<select id="useList" resultType="com.example.pj.dto.CouponDetailDTO">
+		select couponid, cd.couponCode, couponName, couponPrice, couponImage 
+		from couponDetail cd, coupon c
+		where cd.couponCode = c.couponCode and userid = {userid} and couponState = 1
+	</select>
+	
+	<update id="useCoupon">
+		update couponDetail set couponState = 1 where couponid = #{couponid}
+	</update>
+	
+	<delete id="downCouponDelete">
+		delete from couponDetail where couponCode = #{couponCode}
+	</delete>
+</mapper>
