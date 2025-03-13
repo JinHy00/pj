@@ -8,7 +8,7 @@
         values (#{userid}, #{name}, #{passwd}, #{email}, #{phoneNum}, #{zipCode}, #{mainAddress}, #{detailAddress})
     </insert>
 	
-	<select id="loginMember" resultType="com.example.pj.dto.MemberDTO">
+	<select id="loginMember" resultType="String">
     	select name from member where userid = #{userid} and passwd = #{passwd}
 	</select>
 	

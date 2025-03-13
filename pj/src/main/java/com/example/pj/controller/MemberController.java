@@ -32,80 +32,81 @@ public class MemberController {
         memberService.insertMember(dto);
     }
     
-    // String 으로 값 전달 안되면 Map 으로 변경
+    // String 으로 값 전달 안되면 Map 으로 변경 ( 변경 )
     @PostMapping("id_check")
-    public String id_check(@RequestParam(name = "userid") String userid) {
+    public Map<String, Object> id_check(@RequestParam(name = "userid") String userid) {
         int result = memberService.id_check(userid);
+        Map<String, Object> map = new HashMap<>();
         if(result == 0) {
-        	return "사용 가능한 아이디입니다."; 
+           map.put("message", "able");
         } else {
-			return "이미 존재하는 아이디입니다.";
-		}
+         map.put("message", "disable");
+      }
+        return map;
     }
     
     // session 을 map 에 저장해야 할 수도
     @PostMapping("login")
-    public Map<String, Object> login(@RequestParam(name = "userid") String userid, @RequestParam(name = "passwd") String passwd, HttpSession session) {
+    public Map<String, Object> login(@RequestParam(name = "userid") String userid, @RequestParam(name = "passwd") String passwd) {
         String name = memberService.loginMember(userid, passwd);
+        System.out.println("name"+ name);
         Map<String, Object> map = new HashMap<>();
         // 로그인 성공
         if(name != null) {
-        	session.setAttribute("userid", userid);
-        	session.setAttribute("name", name);
-        	return map;
+           map.put("name", name);
+           map.put("message", "success");
         } else {
-        	map.put("msg", "아이디 또는 비밀번호가 틀렸습니다.");
-			return map;
-		}
-        
+           map.put("message", "error");
+      }
+        return map;
     }
     
     // 세션으로 저장해놓은 값
     // 나중에 null 처리 해야할 수도
-    @GetMapping("login_info")
-    public ResponseEntity<Map<String, Object>> login_info(HttpSession session) {
-    	String userid = (String) session.getAttribute("userid");
-    	String name = (String) session.getAttribute("name");
-    	Map<String, Object> map = new HashMap<>();
-    	map.put("userid", userid);
-    	map.put("name", name);
-        return ResponseEntity.ok(map);
-    }
+//    @GetMapping("login_info")
+//    public ResponseEntity<Map<String, Object>> login_info(HttpSession session) {
+//       String userid = (String) session.getAttribute("userid");
+//       System.out.println("userid"+ userid);
+//       String name = (String) session.getAttribute("name");
+//       Map<String, Object> map = new HashMap<>();
+//       map.put("userid", userid);
+//       map.put("name", name);
+//        return ResponseEntity.ok(map);
+//    }
     
-    @GetMapping("logout")
-    public void logout(HttpSession session) {
-    	session.invalidate();
-    }
+//    @RequestMapping(value = "logout", method = {RequestMethod.POST, RequestMethod.GET})
+//    public void logout(HttpSession session) {
+//       session.invalidate();
+//    }
+//    
     
     @GetMapping("detail")
-    public MemberDTO detail(HttpSession session) {
-    	String userid = (String) session.getAttribute("userid");
-    	MemberDTO dto = memberService.detail(userid);
-    	return dto;
+    public MemberDTO detail(@RequestParam(name = "userid") String userid) {
+       MemberDTO dto = memberService.detail(userid);
+       return dto;
     }
     
     @PostMapping("update")
     public void update(MemberDTO dto) {
-    	memberService.update(dto);
+       memberService.update(dto);
     }
     
     @PostMapping("passwd_check")
-    public Map<String, Object> passwd_check(@RequestParam(name = "passwd") String passwd, HttpSession session) {
+    public Map<String, Object> passwd_check(@RequestParam(name = "passwd") String passwd, @RequestParam(name = "userid") String userid) {
         Map<String, Object> map = new HashMap<>();
-        String userid = (String) session.getAttribute("userid");
         int result = memberService.passwd_check(userid, passwd);
+        // 비밀번호 불일치
         if(result == 0) {
-        	map.put("msg", "비밀번호를 확인해주세요.");
+           map.put("message", "error");
         } else {
-			map.put("msg", "비밀번호 일치");
-		}
+         map.put("message", "success");
+      }
         return map;
     }
     
-    // 경로에 userid 넣을 지 session 으로 할지
-    @GetMapping("delete")
-    public void delete(HttpSession session) {
-    	String userid = (String) session.getAttribute("userid");
-    	memberService.delete(userid);
+    // 경로에 userid 넣을 지 
+    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
+    public void delete(@RequestParam(name = "userid") String userid) {
+       memberService.delete(userid);
     }
 }
