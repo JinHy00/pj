@@ -28,12 +28,12 @@ public class WishController {
 	}
 	
 	@PostMapping("/insert")
-	public String insert(WishDTO dto) {
+	public void insert(WishDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("wishCode", dto.getWishCode());
 		map.put("userid", dto.getUserid());
 		map.put("productCode", dto.getProductCode());
-		return wishService.insert(map);
+		wishService.insert(map);
 	}
 	
 	@GetMapping("/delete/{wishCode}")

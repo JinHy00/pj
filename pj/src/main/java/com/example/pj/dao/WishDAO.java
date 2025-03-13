@@ -9,9 +9,7 @@ public interface WishDAO {
 	
 	List<WishDTO> list(String userid);
 	
-	int count(String userid, int productCode);
-	
-	String insert(Map<String, Object> map);
+	void insert(Map<String, Object> map);
 	
 	void delete(int wishCode, String userid);
 }

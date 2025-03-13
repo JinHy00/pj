@@ -21,15 +21,10 @@ public class WishServiceImpl implements WishService {
 		return wishDao.list(userid);
 	}
 	
-	@Override
-	public int count(String userid, int productCode) {
-		return wishDao.count(userid, productCode);
-	}
-	
 	@Transactional
 	@Override
-	public String insert(Map<String, Object> map) {
-		return wishDao.insert(map);
+	public void insert(Map<String, Object> map) {
+		wishDao.insert(map);
 	}
 		
 	@Override

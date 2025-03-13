@@ -21,13 +21,6 @@
 		where wishCode=#{wishCode}
 	</select>
 	
-	<select id="count" resultType="int">
-		select count(*)
-		from wish w
-		join product p on w.productCode = p.productCode
-		where w.productCode = #{productCode} and w.userid = #{userid}
-	</select>
-	
 	<delete id="delete">
 		delete from wish
 		where wishCode=#{wishCode} and userid=#{userid}

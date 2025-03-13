@@ -1,6 +1,5 @@
 package com.example.pj.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,17 +21,8 @@ public class WishDAOImpl implements WishDAO {
 	}
 	
 	@Override
-	public int count(String userid, int productCode) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("userid", userid);
-		map.put("productCode", productCode);
-		return sqlSession.selectOne("wish.count", map);
-	}
-	
-	@Override
-	public String insert(Map<String, Object> map) {
+	public void insert(Map<String, Object> map) {
 		sqlSession.insert("wish.insert", map);
-		return "";
 	}
 	
 	@Override
