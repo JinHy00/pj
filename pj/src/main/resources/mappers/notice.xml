@@ -15,8 +15,8 @@
     </select>
 
 	<insert id="insert">
-		insert into notice (<!-- adminid, --> noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
-		values (<!-- #{adminid},--> #{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})
+		insert into notice (adminid,noticeTitle,noticeContent,n_categoryCode,noticeFIle) 
+		values (#{adminid},#{noticeTitle},#{noticeContent},#{n_categoryCode},#{noticeFile})
 	</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.NoticeDTO">

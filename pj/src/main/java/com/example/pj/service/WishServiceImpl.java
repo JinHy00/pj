@@ -26,16 +26,12 @@ public class WishServiceImpl implements WishService {
 		return wishDao.count(userid, productCode);
 	}
 	
-//	@Transactional
-//	@Override
-//	public String insert(WishDTO dto) {
-//		if (wishDao.count(dto.getUserid() , dto.getProductCode()) > 0) {
-//			throw new RuntimeException("이미 찜한 상품입니다.");
-//		}
-//		return wishDao.insert(dto);
-//	}
-	
-	
+	@Transactional
+	@Override
+	public String insert(Map<String, Object> map) {
+		return wishDao.insert(map);
+	}
+		
 	@Override
 	public void delete(int wishCode, String userid) {
 		wishDao.delete(wishCode, userid);

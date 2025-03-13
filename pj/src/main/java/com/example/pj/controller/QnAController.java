@@ -49,7 +49,7 @@ public class QnAController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", dto.getQnaCode());
-		// map.put("userid", dto.getUserid());
+		map.put("userid", dto.getUserid());
 		map.put("qnaTitle", dto.getQnaTitle());
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());
@@ -86,7 +86,7 @@ public class QnAController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", dto.getQnaCode());
-		// map.put("userid", dto.getUserid());
+		map.put("userid", dto.getUserid());
 		map.put("qnaTitle", dto.getQnaTitle());
 		map.put("qnaContent", dto.getQnaContent());
 		map.put("q_categoryCode", dto.getQ_categoryCode());
@@ -122,7 +122,7 @@ public class QnAController {
 	public String reply_write(@PathVariable(name = "qnaCode") int qnaCode, QnAReplyDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", qnaCode);
-		// map.put("adminid", dto.getAdminid());
+		map.put("adminid", dto.getAdminid());
 		map.put("q_replyContent", dto.getQ_replyContent());
 		map.put("q_replyCode", qnaCode);
 		return qnaService.reply_write(map);
@@ -132,7 +132,7 @@ public class QnAController {
 	public void reply_update(QnAReplyDTO dto) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("qnaCode", dto.getQnaCode());
-		// map.put("adminid", dto.getAdminid());
+		map.put("adminid", dto.getAdminid());
 		map.put("q_replyContent", dto.getQ_replyContent());
 		map.put("q_replyCode", dto.getQ_replyCode());
 		qnaService.reply_update(map);

@@ -11,7 +11,7 @@ public interface WishService {
 	
 	int count(String userid, int productCode);
 	
-	// String insert(WishDTO dto);
+	String insert(Map<String, Object> map);
 	
 	void delete(int wishCode, String userid);
 }

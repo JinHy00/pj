@@ -3,9 +3,10 @@
 <mapper namespace="qna">
 
     <select id="list" resultType="com.example.pj.dto.QnADTO">
-		select qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile
+		select m.userid, qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile
         from qna q
-        join q_category qc on q.q_categoryCode = qc.q_categoryCode 
+        join q_category qc on q.q_categoryCode = qc.q_categoryCode
+        join member m on m.userid = q.userid 
         <where>
             <if test="searchkey != null and search != null and search != ''">
                 ${searchkey} like concat('%', #{search}, '%')
@@ -15,13 +16,13 @@
     </select>
 
 	<insert id="insert">
-		insert into qna (<!-- userid,-->qnaTitle,qnaContent,q_categoryCode,qnaFile) 
-		values (<!-- #{userid},-->#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
+		insert into qna (userid,qnaTitle,qnaContent,q_categoryCode,qnaFile) 
+		values (#{userid},#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})
 	</insert>
 	
 	<insert id="reply_write">
-		insert into q_reply (qnaCode, q_replyCode, q_replyContent) 
-		values (#{qnaCode},#{qnaCode},#{q_replyContent})
+		insert into q_reply (adminid,qnaCode, q_replyCode, q_replyContent) 
+		values (#{adminid},#{qnaCode},#{qnaCode},#{q_replyContent})
 	</insert>
 	
 	<select id="reply_list" resultType="com.example.pj.dto.QnAReplyDTO">
@@ -32,9 +33,10 @@
 	</select>
 	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
-		select qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
+		select q.userid, qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
 		from qna q
 		join q_category qc on q.q_categoryCode = qc.q_categoryCode
+		join member m on m.userid = q.userid 
 		where qnaCode=#{qnaCode}
 	</select>
 	

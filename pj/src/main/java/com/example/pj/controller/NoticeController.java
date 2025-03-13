@@ -47,7 +47,7 @@ public class NoticeController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("noticeCode", dto.getNoticeCode());
-		// map.put("adminid", dto.getAdminid());
+		map.put("adminid", dto.getAdminid());
 		map.put("noticeTitle", dto.getNoticeTitle());
 		map.put("noticeContent", dto.getNoticeContent());
 		map.put("n_categoryCode", dto.getN_categoryCode());
@@ -84,7 +84,7 @@ public class NoticeController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("noticeCode", dto.getNoticeCode());
-		// map.put("adminid", dto.getAdminid());
+		map.put("adminid", dto.getAdminid());
 		map.put("noticeTitle", dto.getNoticeTitle());
 		map.put("noticeContent", dto.getNoticeContent());
 		map.put("n_categoryCode", dto.getN_categoryCode());
