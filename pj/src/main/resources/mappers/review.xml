@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+
+	<select id="list" resultType="com.example.pj.dto.ReviewDTO">
+		select reviewCode, r.userid, reviewDate, reviewContent, reviewFile, reviewScore
+		from review r
+		join order o on r.orderCode = o.orderCode
+		where productCode=#{productCode} 
+	</select>
+	
+	<select id="my_review" resultType="com.example.pj.dto.ReviewDTO">
+		select reviewCode, userid, reviewDate, reviewContent, reviewFile, reviewScore
+		from review
+		where userid=#{userid}
+	</select>
+	
+	<select id="filename" resultType="String">
+		select reviewFile 
+		from review 
+		where reviewCode=#{reviewCode}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*)
+		from review r
+		join orders o on r.orderCode = o.orderCode
+		where productCode=#{productCode}
+	</select> 
+	
+	<insert id="insert">
+		insert into review (userid, orderCode,reviewContent, reviewFile, reviewScore)
+		values (#{userid},#{orderCode},#{reviewContent},#{reviewFile},#{reviewSocre})
+	</insert>
+	
+	<select id="detail" resultType="com.example.pj.dto.ReviewDTO">
+		select p.productCode, productName, mainImage
+		from product p
+		join orders o on p.productCode=o.productCode
+		where orderCode=#{orderCode}
+	</select>
+	
+	<update id="update">
+		update review 
+		set reviewContent=#{reviewContent}
+		reviewFile=#{reviewFile}
+		reviewScore=#{reviewScore}
+		where reviewCode=#{reviewCode}
+	</update>
+	
+	<delete id="delete">
+		delete from review 
+		where reviewCode=#{reviewCode}
+	</delete>
+</mapper>
