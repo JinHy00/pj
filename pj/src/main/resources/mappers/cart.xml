@@ -4,8 +4,8 @@
 
     <!-- 장바구니에 추가 -->
     <insert id="addCart" useGeneratedKeys="true" keyProperty="cartCode">
-        INSERT INTO cart (userid, productCode, cartAmount, finalPrice)
-        VALUES (#{userId}, #{productCode}, #{cartAmount}, #{finalPrice})
+        INSERT INTO cart (userid, productCode, cartAmount)
+        VALUES (#{userId}, #{productCode}, #{cartAmount})
     </insert>
 
     <!-- 장바구니 목록 조회 -->
