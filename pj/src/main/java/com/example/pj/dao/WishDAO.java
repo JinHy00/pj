@@ -11,5 +11,7 @@ public interface WishDAO {
 	
 	void insert(Map<String, Object> map);
 	
-	void delete(int wishCode, String userid);
+	void delete(int wishCode);
+	
+	int count(int productCode, String userid);
 }
