@@ -25,11 +25,4 @@
 		delete from wish
 		where wishCode=#{wishCode}
 	</delete>
-	
-	<select id="count" resultType="int">
-    	select count(*) 
-    	from wish 
-    	where productCode = #{productCode} and userid=#{userid}
-	</select>
-	
 </mapper>

@@ -33,10 +33,9 @@
 	</select>
 	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
-		select q.userid, qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
+		select userid, qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
 		from qna q
 		join q_category qc on q.q_categoryCode = qc.q_categoryCode
-		join member m on m.userid = q.userid 
 		where qnaCode=#{qnaCode}
 	</select>
 	

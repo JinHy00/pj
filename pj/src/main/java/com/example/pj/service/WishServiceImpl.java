@@ -31,10 +31,4 @@ public class WishServiceImpl implements WishService {
 	public void delete(int wishCode) {
 		wishDao.delete(wishCode);
 	}
-	
-	@Override
-	public boolean count(int productCode, String userid) {
-		int count = wishDao.count(productCode, userid);
-		return count > 0;
-	}
 }
