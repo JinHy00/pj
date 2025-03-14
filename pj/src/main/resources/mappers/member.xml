@@ -23,6 +23,7 @@
 	<update id="update">
 		update member set
 		name = #{name}, email = #{email}, phoneNum = #{phoneNum}, zipCode = #{zipCode}, mainAddress = #{mainAddress}, detailAddress = #{detailAddress}
+		where userid = #{userid}
 	</update>
 
 	<select id="id_check" resultType="int">

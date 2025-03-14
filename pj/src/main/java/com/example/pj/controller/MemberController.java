@@ -76,6 +76,8 @@ public class MemberController {
     @PostMapping("passwd_check")
     public Map<String, Object> passwd_check(@RequestParam(name = "passwd") String passwd, @RequestParam(name = "userid") String userid) {
         Map<String, Object> map = new HashMap<>();
+        System.out.println("userid: "+ userid);
+        System.out.println("passwd: "+ passwd);
         int result = memberService.passwd_check(userid, passwd);
         // 비밀번호 불일치
         if(result == 0) {
@@ -87,8 +89,9 @@ public class MemberController {
     }
     
     // 경로에 userid 넣을 지 
-    @RequestMapping(value = "delete", method = {RequestMethod.POST, RequestMethod.GET})
-    public void delete(@RequestParam(name = "userid") String userid) {
+    @RequestMapping(value = "delete/{userid}", method = {RequestMethod.POST, RequestMethod.GET})
+    public void delete(@PathVariable(name = "userid") String userid) {
+    	System.out.println("userid: "+userid);
        memberService.delete(userid);
     }
 }
