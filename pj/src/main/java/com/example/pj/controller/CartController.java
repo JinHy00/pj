@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.pj.dto.CartDTO;
 import com.example.pj.service.CartService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/cart")
@@ -48,9 +50,18 @@ public class CartController {
 
     // 장바구니 수량 수정
     @PutMapping("/update")
-    public void updateCartAmount(@RequestBody CartDTO cartDTO) {
-        cartService.updateCartAmount(cartDTO);
+    public Map<String, Object> updateCartAmount(@RequestBody CartDTO cartDTO) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // 수량 업데이트 수행
+            cartService.updateCartAmount(cartDTO);
+            response.put("success", true);
+        } catch (Exception e) {
+            response.put("success", false);
+        }
+        return response;  // 직접 반환
     }
+
 
     // 장바구니 총 금액 계산
     @GetMapping("/total")

@@ -33,5 +33,12 @@
         SET cartAmount = #{cartAmount}, finalPrice = #{finalPrice}
         WHERE cartCode = #{cartCode}
     </update>
-
+	
+	
+	<update id="updateCartAmount" parameterType="com.example.pj.dto.CartDTO">
+	    UPDATE cart
+	    SET cartAmount = #{cartAmount}
+	    WHERE cartCode = #{cartCode}
+	</update>
+	
 </mapper>
