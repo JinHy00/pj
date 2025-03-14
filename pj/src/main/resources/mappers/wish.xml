@@ -2,27 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wish">
 
-	<select id="list" resultType="com.example.pj.dto.WishDTO">
-		select w.wishCode, w.productCode, p.productName, p.price, p.mainImage
-		from wish w
-		join product p on w.productCode = p.productCode
-		where w.userid=#{userid}
-		order by w.wishCode desc
-	</select>
-	
-	<insert id="insert" parameterType="com.example.pj.dto.WishDTO">
-		insert into wish (userid, productCode)
-		values (#{userid}, #{productCode})
-	</insert>
-	
-	<select id="detail" resultType="com.example.pj.dto.WishDTO">
-		select userid, productCode
-		from wish 
-		where wishCode=#{wishCode}
-	</select>
-	
-	<delete id="delete">
-		delete from wish
-		where wishCode=#{wishCode}
-	</delete>
+   <select id="list" resultType="com.example.pj.dto.WishDTO">
+      select w.wishCode, w.productCode, p.productName, p.price, p.mainImage
+      from wish w
+      join product p on w.productCode = p.productCode
+      where w.userid=#{userid}
+      order by w.wishCode desc
+   </select>
+   
+   <insert id="insert" parameterType="com.example.pj.dto.WishDTO">
+      insert into wish (userid, productCode)
+      values (#{userid}, #{productCode})
+   </insert>
+   
+   <select id="detail" resultType="com.example.pj.dto.WishDTO">
+      select userid, productCode
+      from wish 
+      where wishCode=#{wishCode}
+   </select>
+   
+   <delete id="delete">
+      delete from wish
+      where wishCode=#{wishCode}
+   </delete>
+   
+   <select id="count" resultType="int">
+       select count(*) 
+       from wish 
+       where productCode = #{productCode} and userid=#{userid}
+   </select>
+   
 </mapper>

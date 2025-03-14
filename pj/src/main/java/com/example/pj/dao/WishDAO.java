@@ -6,10 +6,12 @@ import java.util.Map;
 import com.example.pj.dto.WishDTO;
 
 public interface WishDAO {
-	
-	List<WishDTO> list(String userid);
-	
-	void insert(Map<String, Object> map);
-	
-	void delete(int wishCode);
+   
+   List<WishDTO> list(String userid);
+   
+   void insert(Map<String, Object> map);
+   
+   void delete(int wishCode);
+   
+   int count(int productCode, String userid);
 }
