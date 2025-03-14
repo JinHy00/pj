@@ -61,29 +61,11 @@ public class MemberController {
         return map;
     }
     
-    // 세션으로 저장해놓은 값
-    // 나중에 null 처리 해야할 수도
-//    @GetMapping("login_info")
-//    public ResponseEntity<Map<String, Object>> login_info(HttpSession session) {
-//       String userid = (String) session.getAttribute("userid");
-//       System.out.println("userid"+ userid);
-//       String name = (String) session.getAttribute("name");
-//       Map<String, Object> map = new HashMap<>();
-//       map.put("userid", userid);
-//       map.put("name", name);
-//        return ResponseEntity.ok(map);
-//    }
-    
-//    @RequestMapping(value = "logout", method = {RequestMethod.POST, RequestMethod.GET})
-//    public void logout(HttpSession session) {
-//       session.invalidate();
-//    }
-//    
-    
-    @GetMapping("detail")
-    public MemberDTO detail(@RequestParam(name = "userid") String userid) {
-       MemberDTO dto = memberService.detail(userid);
-       return dto;
+    @RequestMapping(value = "detail/{userid}")
+    public MemberDTO detail(@PathVariable(name = "userid") String userid) {
+       System.out.println("==detail==");
+       System.out.println("id: "+userid);
+       return memberService.detail(userid);
     }
     
     @PostMapping("update")
