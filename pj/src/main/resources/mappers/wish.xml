@@ -23,6 +23,6 @@
 	
 	<delete id="delete">
 		delete from wish
-		where wishCode=#{wishCode} and userid=#{userid}
+		where wishCode=#{wishCode}
 	</delete>
 </mapper>

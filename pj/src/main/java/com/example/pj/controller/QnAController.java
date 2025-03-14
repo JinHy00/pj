@@ -59,11 +59,15 @@ public class QnAController {
 	
 	@GetMapping("/detail/{qnaCode}")
 	public QnADTO qna_detail(@PathVariable(name = "qnaCode") int qnaCode) {
+		System.out.println("==qna==");
+		System.out.println("codeqna: "+ qnaCode );
 		return qnaService.detail(qnaCode);	
 	}
 	
 	@GetMapping("/edit/{qnaCode}")
 	public QnADTO qna_edit(@PathVariable(name = "qnaCode") int qnaCode) {
+		System.out.println("== edit==");
+		System.out.println(qnaCode);
 		return qnaService.edit(qnaCode);	
 	}
 	

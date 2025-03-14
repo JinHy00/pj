@@ -11,5 +11,5 @@ public interface WishService {
 	
 	void insert(Map<String, Object> map);
 	
-	void delete(int wishCode, String userid);
+	void delete(int wishCode);
 }

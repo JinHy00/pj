@@ -26,7 +26,7 @@ public class WishDAOImpl implements WishDAO {
 	}
 	
 	@Override
-	public void delete(int wishCode, String userid) {
+	public void delete(int wishCode) {
 		sqlSession.delete("wish.delete", wishCode);
 	}
 }

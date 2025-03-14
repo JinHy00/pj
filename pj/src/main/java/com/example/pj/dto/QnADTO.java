@@ -17,9 +17,11 @@ public class QnADTO {
 	private String qnaFile;
 	private String userid;
 	private int q_categoryCode;
+	
 	private String q_categoryName;
 	private MultipartFile img;
 	private QnAReplyDTO qnaReply;
+	
 	public int getQnaCode() {
 		return qnaCode;
 	}

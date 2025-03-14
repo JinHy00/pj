@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pj.dto.WishDTO;
@@ -22,8 +23,8 @@ public class WishController {
 	@Autowired
 	WishService wishService;
 	
-	@RequestMapping("/list")
-	public List<WishDTO> list(@RequestParam(name = "userid") String userid) {
+	@RequestMapping("/list/{userid}")
+	public List<WishDTO> list(@PathVariable(name = "userid") String userid) {
 		return wishService.list(userid);
 	}
 	
@@ -36,8 +37,10 @@ public class WishController {
 		wishService.insert(map);
 	}
 	
-	@GetMapping("/delete/{wishCode}")
-	public void delete(@PathVariable(name = "wishCode") int wishCode, @RequestParam(name = "userid") String userid) {
-		wishService.delete(wishCode, userid);
+	@RequestMapping(value = "/delete/{wishCode}", method = {RequestMethod.POST, RequestMethod.GET})
+	public void delete(@PathVariable(name = "wishCode") int wishCoded) {
+		System.out.println("==delete==");
+		System.out.println("code: "+wishCoded);
+		wishService.delete(wishCoded);
 	}
 }
