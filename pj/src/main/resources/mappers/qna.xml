@@ -14,7 +14,15 @@
         </where>
         order by qnaDate desc
     </select>
-
+	
+	<select id="my_list" resultType="com.example.pj.dto.QnADTO">
+		select userid, qnaCode, qnaTitle, qnaContent, qc.q_categoryName, qnaDate, qnaFile
+        from qna q
+        join q_category qc on q.q_categoryCode = qc.q_categoryCode
+        where userid=#{userid} 
+        order by qnaDate desc
+    </select>
+	
 	<insert id="insert">
 		insert into qna (userid,qnaTitle,qnaContent,q_categoryCode,qnaFile) 
 		values (#{userid},#{qnaTitle},#{qnaContent},#{q_categoryCode},#{qnaFile})

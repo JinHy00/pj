@@ -10,6 +10,8 @@ import com.example.pj.dto.QnAReplyDTO;
 public interface QnADAO {
 	List<QnADTO> list(String searchkey, String search);
 	
+	List<QnADTO> my_list(String userid);
+	
 	String insert(Map<String, Object> map);
 	
 	QnADTO detail(int qnaCode);

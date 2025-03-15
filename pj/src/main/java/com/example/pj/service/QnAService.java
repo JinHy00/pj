@@ -13,6 +13,8 @@ public interface QnAService {
 	
 	List<QnADTO> list(String searchkey, String search);
 	
+	List<QnADTO> my_list(String userid);
+	
 	String insert(Map<String, Object> map);
 	
 	QnADTO detail(int qnaCode);

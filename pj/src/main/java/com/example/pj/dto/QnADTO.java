@@ -2,6 +2,9 @@ package com.example.pj.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,12 +12,15 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Data
 public class QnADTO {
 	private int qnaCode;
 	private String qnaTitle;
 	private String qnaContent;
 	private String qnaDate;
 	private String qnaFile;
+	
+	@JsonProperty("userid")
 	private String userid;
 	private int q_categoryCode;
 	

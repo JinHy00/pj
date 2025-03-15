@@ -22,6 +22,11 @@ public class QnAServiceImpl implements QnAService {
 	public List<QnADTO> list(String searchkey, String search) {
 		return qnaDao.list(searchkey, search);
 	}
+    
+    @Override
+    public List<QnADTO> my_list(String userid) {
+    	return qnaDao.my_list(userid);
+    }
 	
 	@Transactional
 	@Override

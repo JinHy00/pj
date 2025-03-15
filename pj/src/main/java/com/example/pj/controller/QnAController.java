@@ -33,6 +33,11 @@ public class QnAController {
 	public List<QnADTO> qna_list(@RequestParam(name = "searchkey", defaultValue = "title") String searchkey, @RequestParam(name = "search", defaultValue = "") String search) {
 		return qnaService.list(searchkey, search);
 	}
+    
+    @RequestMapping("/my_list")
+    public List<QnADTO> my_list(@RequestParam(name = "userid") String userid) {
+    	return qnaService.my_list(userid);
+    }
 	
 	@PostMapping("/insert")
 	public String qna_insert(QnADTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
@@ -59,8 +64,6 @@ public class QnAController {
 	
 	@GetMapping("/detail/{qnaCode}")
 	public QnADTO qna_detail(@PathVariable(name = "qnaCode") int qnaCode) {
-		System.out.println("==qna==");
-		System.out.println("codeqna: "+ qnaCode );
 		return qnaService.detail(qnaCode);	
 	}
 	

@@ -25,6 +25,11 @@ public class QnADAOImpl implements QnADAO {
 		map.put("search", search);
 		return sqlSession.selectList("qna.list", map);
 	}
+	
+	@Override
+	public List<QnADTO> my_list(String userid) {
+		return sqlSession.selectList("qna.my_list", userid);
+	}
 
 	@Override
 	public String insert(Map<String, Object> map) { 
