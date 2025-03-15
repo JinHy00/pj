@@ -69,8 +69,6 @@ public class QnAController {
 	
 	@GetMapping("/edit/{qnaCode}")
 	public QnADTO qna_edit(@PathVariable(name = "qnaCode") int qnaCode) {
-		System.out.println("== edit==");
-		System.out.println(qnaCode);
 		return qnaService.edit(qnaCode);	
 	}
 	

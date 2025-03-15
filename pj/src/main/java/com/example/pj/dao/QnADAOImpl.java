@@ -40,8 +40,6 @@ public class QnADAOImpl implements QnADAO {
 	@Override
 	public QnADTO detail(int qnaCode) {
 		QnADTO result = sqlSession.selectOne("qna.detail", qnaCode);
-		System.out.println("========userid============");
-		System.out.println(result.getUserid());
 		return result;
 	}
 	
