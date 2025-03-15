@@ -41,10 +41,10 @@
 	</select>
 	
 	<select id="detail" resultType="com.example.pj.dto.QnADTO">
-		select userid, qnaCode, qc.q_categoryName, qnaTitle, qnaContent, qnaDate, qnaFile
-		from qna q
-		join q_category qc on q.q_categoryCode = qc.q_categoryCode
-		where qnaCode=#{qnaCode}
+	    select q.userid, q.qnaCode, qc.q_categoryName, q.qnaTitle, q.qnaContent, q.qnaDate, q.qnaFile
+	    from qna q
+	    join q_category qc on q.q_categoryCode = qc.q_categoryCode
+	    where q.qnaCode=#{qnaCode}
 	</select>
 	
 	<select id="edit" resultType="com.example.pj.dto.QnADTO">
