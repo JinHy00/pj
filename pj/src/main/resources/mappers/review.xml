@@ -5,7 +5,7 @@
 	<select id="list" resultType="com.example.pj.dto.ReviewDTO">
 		select reviewCode, r.userid, reviewDate, reviewContent, reviewFile, reviewScore
 		from review r
-		join orders o on r.orderCode = o.orderCode
+		join product p on r.productCode = p.productCode
 		where productCode=#{productCode} 
 	</select>
 	
