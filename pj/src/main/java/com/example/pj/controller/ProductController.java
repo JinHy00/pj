@@ -50,7 +50,7 @@ public class ProductController {
     public Map<String, Object> list_brand(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                           @PathVariable(name = "brandCode") int brandCode) {
         Map<String, Object> map = new HashMap<>();
-        List<ProductDTO> list = productService.brandList(brandCode, keyword);
+        List<ProductDTO> list = productService.brandList(brandCode, keyword);  // 브랜드에 해당하는 상품만 반환
         if (list == null || list.isEmpty()) {
             map.put("message", "등록된 상품이 없습니다.");
         } else {
@@ -59,6 +59,7 @@ public class ProductController {
         map.put("keyword", keyword);
         return map;
     }
+
 
     @RequestMapping(value = "list/gender/{gender}", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> list_gender(@RequestParam(name = "searchkey", defaultValue = "all") String searchkey,

@@ -26,14 +26,15 @@
     </select>
 
 
-    <select id="brand_list" resultType="com.example.pj.dto.ProductDTO">
-        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-        from product p, brand b
-        where p.brandCode = b.brandCode and p.brandCode = #{brandCode}
-        and productName  like concat ('%', #{keyword}, '%')
-        order by productCode
-    </select>
+    <select id="brandList" resultType="com.example.pj.dto.ProductDTO">
+	    select productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+	    from product p, brand b
+	    where p.brandCode = b.brandCode and p.brandCode = #{brandCode}
+	    and productName  like concat ('%', #{keyword}, '%')
+	    order by productCode
+	</select>
 
+  
     <select id="gender_list" resultType="com.example.pj.dto.ProductDTO">
         select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
         from product p, brand b where p.brandCode = b.brandCode and gender = #{gender} and

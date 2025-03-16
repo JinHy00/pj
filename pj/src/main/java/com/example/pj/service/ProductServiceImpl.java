@@ -28,8 +28,8 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> brandList(int brandCode, String keyword) {
         Map<String, Object> map = new HashMap<>();
         map.put("keyword", keyword);
-        map.put("brandCode", brandCode);
-        return productMapper.brandList(map);
+        map.put("brandCode", brandCode);  // 브랜드 코드 추가
+        return productMapper.brandList(map);  
     }
 
     @Override
