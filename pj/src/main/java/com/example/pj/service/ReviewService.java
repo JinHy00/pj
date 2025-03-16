@@ -1,12 +1,12 @@
-package com.example.pj.dao;
+package com.example.pj.service;
 
 import java.util.List;
 import java.util.Map;
 
 import com.example.pj.dto.ReviewDTO;
 
-public interface ReviewDAO {
-	
+public interface ReviewService {
+
 	List<ReviewDTO> list(int productCode);
 	
 	String insert(Map<String, Object> map);

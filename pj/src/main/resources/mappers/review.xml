@@ -5,7 +5,7 @@
 	<select id="list" resultType="com.example.pj.dto.ReviewDTO">
 		select reviewCode, r.userid, reviewDate, reviewContent, reviewFile, reviewScore
 		from review r
-		join order o on r.orderCode = o.orderCode
+		join orders o on r.orderCode = o.orderCode
 		where productCode=#{productCode} 
 	</select>
 	
@@ -21,29 +21,29 @@
 		where reviewCode=#{reviewCode}
 	</select>
 	
-	<select id="count" resultType="int">
-		select count(*)
-		from review r
-		join orders o on r.orderCode = o.orderCode
-		where productCode=#{productCode}
-	</select> 
+	<select id="edit" resultType="com.example.pj.dto.ReviewDTO">
+		select r.reviewCode, r.userid, r.reviewDate, r.reviewContent, r.reviewFile, r.reviewScore,p.productCode, p.productName, p.mainImage
+	    from review r
+	    join product p on r.productCode = p.productCode
+	    where r.reviewCode=#{reviewCode}
+	</select>
 	
 	<insert id="insert">
-		insert into review (userid, orderCode,reviewContent, reviewFile, reviewScore)
-		values (#{userid},#{orderCode},#{reviewContent},#{reviewFile},#{reviewSocre})
+		insert into review (userid,productCode, orderCode,reviewContent, reviewFile, reviewScore)
+		values (#{userid},#{productCode},#{orderCode},#{reviewContent},#{reviewFile},#{reviewScore})
 	</insert>
 	
 	<select id="detail" resultType="com.example.pj.dto.ReviewDTO">
-		select p.productCode, productName, mainImage
-		from product p
-		join orders o on p.productCode=o.productCode
-		where orderCode=#{orderCode}
+		select r.reviewCode, r.userid, r.reviewDate, r.reviewContent, r.reviewFile, r.reviewScore,p.productCode, p.productName, p.mainImage
+	    from review r
+	    join product p on r.productCode = p.productCode
+	    where r.reviewCode=#{reviewCode}
 	</select>
 	
 	<update id="update">
 		update review 
-		set reviewContent=#{reviewContent}
-		reviewFile=#{reviewFile}
+		set reviewContent=#{reviewContent},
+		reviewFile=#{reviewFile},
 		reviewScore=#{reviewScore}
 		where reviewCode=#{reviewCode}
 	</update>
