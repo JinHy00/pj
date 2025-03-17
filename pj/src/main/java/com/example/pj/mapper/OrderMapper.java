@@ -29,6 +29,9 @@ public interface OrderMapper {
     
     // 주문 내역
     List<OrderDTO> orderList(String userid);
+
+	OrderDTO orderDetail(int orderCode);
+
     
     // 주문 상품 상세 정보 => orderDate로 할 수도
     

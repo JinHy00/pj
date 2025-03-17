@@ -91,14 +91,43 @@ public class OrderController {
         memberService.save_point(userid, savePoint);
     }
     
-    @RequestMapping(value = "orderList/{userid}", method= {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "orderList/{userid}", method = {RequestMethod.GET, RequestMethod.POST})
     public List<OrderDTO> orderList(@PathVariable(name = "userid") String userid) {
-       return orderService.orderList(userid);
+        List<OrderDTO> orders = orderService.orderList(userid);
+//        System.out.println("==orderlist==");
+//        System.out.println("==orderlist==");
+//        System.out.println("==orderlist=="+userid);
+//        System.out.println("주문 내역: " + orders);  // 주문 내역 출력
+        return orders;
     }
     
-    @PostMapping("state")
-    public void orderState(@RequestParam(name = "orderCode") int orderCode, @RequestParam(name = "orderState") int orderState) {
-        orderService.updateOrderState(orderCode, orderState);
+    @RequestMapping(value = "orderDetail/{orderCode}", method = RequestMethod.GET)
+    public OrderDTO orderDetail(@PathVariable(name = "orderCode") int orderCode) {
+        // 해당 주문의 상세 정보를 가져옵니다.
+        OrderDTO order = orderService.orderDetail(orderCode);
+        //System.out.println("주문 상세: " + order);
+        return order;
     }
+
+
+
+    @RequestMapping("state")
+    public Map<String, Object> orderState(@RequestParam(name = "orderCode") int orderCode, @RequestParam(name = "orderState") int orderState) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            // 상태 변경
+            orderService.updateOrderState(orderCode, orderState);
+            
+            // 응답에 성공 메시지 추가
+            response.put("status", "success");
+            return response;
+        } catch (Exception e) {
+            response.put("status", "error");
+            response.put("message", e.getMessage());
+            return response;
+        }
+    }
+
+
  
 }

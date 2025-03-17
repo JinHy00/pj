@@ -8,12 +8,12 @@
    </insert>
    
    <select id="orderList" resultType="com.example.pj.dto.OrderDTO">
-      select orderCode, o.productCode, orderAmount, orderState, orderDate, productName, price, mainImage
+      select orderCode, o.productCode, orderState, orderDate, productName, price, mainImage, zipCode, mainAddress, detailAddress
       from orders o, product p
       where o.productCode = p.productCode and userid = #{userid} 
    </select>
    
-   <update id="updateState">
+   <update id="updateOrderState">
       update orders set
       orderState = #{orderState} where orderCode = #{orderCode}
    </update>
@@ -22,4 +22,13 @@
       update product set
       amount = amount - #{orderAmount} where productCode = #{productCode}
    </update>
+   
+   <select id="orderDetail" resultType="com.example.pj.dto.OrderDTO">
+	    select orderCode, o.productCode, orderState, orderDate, productName, price, mainImage,
+	           zipCode, mainAddress, detailAddress, recipient, rec_phoneNum
+	    from orders o
+	    join product p on o.productCode = p.productCode
+	    where o.orderCode = #{orderCode}
+	</select>
+	   
 </mapper>

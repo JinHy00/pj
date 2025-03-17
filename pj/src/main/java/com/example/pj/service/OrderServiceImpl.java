@@ -41,5 +41,9 @@ public class OrderServiceImpl implements OrderService {
    public List<OrderDTO> orderList(String userid) {
       return orderMapper.orderList(userid);
    }
-
+   
+   @Override
+   public OrderDTO orderDetail(int orderCode) {
+       return orderMapper.orderDetail(orderCode);
+   }
 }
