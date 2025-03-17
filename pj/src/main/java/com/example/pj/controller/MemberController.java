@@ -1,6 +1,7 @@
 package com.example.pj.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,20 @@ public class MemberController {
     @Autowired
     MemberService memberService;
     
+    @RequestMapping(value="list", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map<String, Object> list(@RequestParam(name="searchkey", defaultValue = "all") String searchkey,
+                                    @RequestParam(name="keyword", defaultValue = "") String keyword){
+        Map<String, Object> map = new HashMap<>();
+        List<MemberDTO> list = memberService.list(searchkey, keyword); // service에서 리스트를 받아옵니다.
+        if(list == null || list.isEmpty()) {
+            map.put("message", "등록된 회원이 없습니다.");
+        } else {
+            map.put("list", list);
+        }
+        map.put("keyword", keyword);
+        return map;
+    }
+
     
     @PostMapping("join")
     public void join(MemberDTO dto) {

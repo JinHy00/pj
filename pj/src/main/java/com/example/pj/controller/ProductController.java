@@ -31,7 +31,7 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-
+    
     @RequestMapping(value = "list", method = {RequestMethod.GET, RequestMethod.POST})
     public Map<String, Object> list(@RequestParam(name = "searchkey", defaultValue = "all") String searchkey,
                                     @RequestParam(name = "keyword", defaultValue = "") String keyword) {

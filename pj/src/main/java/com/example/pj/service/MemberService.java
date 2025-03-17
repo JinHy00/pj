@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.pj.dto.MemberDTO;
 
 public interface MemberService {
-	List<MemberDTO> list(); // 회원 리스트
+	List<MemberDTO> list(String searchkey, String keyword); // 회원 리스트
 	
     void insertMember(MemberDTO dto);  // 회원가입
     

@@ -18,8 +18,11 @@ public class MemberServiceImpl implements MemberService {
 	MemberMapper memberMapper;
 	
 	@Override
-	public List<MemberDTO> list() {
-		return memberMapper.list();
+	public List<MemberDTO> list(String searchkey, String keyword) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchkey", searchkey);
+		map.put("keyword", keyword);
+		return memberMapper.list(map);
 	}
 
 	@Override
