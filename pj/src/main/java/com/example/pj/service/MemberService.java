@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import com.example.pj.dto.MemberDTO;
 
 public interface MemberService {
-   List<MemberDTO> list(); // 회원 리스트
-   
-    void insertMember(MemberDTO dto);  // 회원가입
+	List<MemberDTO> list(String searchkey, String keyword); // 회원 리스트
+	
+	void insertMember(MemberDTO dto);  // 회원가입
     
     String loginMember(String userid, String passwd); // 로그인
     
@@ -29,3 +29,4 @@ public interface MemberService {
     // 포인트 적립
     void save_point(@Param(value = "userid") String userid, @Param(value = "savePoint") int savePoint);
 }
+

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pj.mapper.MemberMapper">  
+	
+	<select id="list" resultType="com.example.pj.dto.MemberDTO">
+	    select userid, name, passwd, email, phoneNum, zipCode, mainAddress, detailAddress, joindate, point
+	    from member
+	    <where>
+	        <if test="searchkey != 'all'">
+	            ${searchkey} like concat('%', #{keyword}, '%')
+	        </if>
+	        <if test="searchkey == 'all'">
+	            name like concat('%', #{keyword}, '%')
+	        </if>
+	    </where>
+	    order by joindate desc
+	</select>
 
+
+    
     <!-- 회원가입 -->
     <insert id="insertMember">
         insert into member (userid, name, passwd, email, phoneNum, zipCode, mainAddress, detailAddress)

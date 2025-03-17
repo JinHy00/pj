@@ -10,9 +10,9 @@ import com.example.pj.dto.MemberDTO;
 
 @Mapper
 public interface MemberMapper {
-   List<MemberDTO> list(); // 회원 리스트
-   
-    void insertMember(MemberDTO dto);  // 회원가입
+	List<MemberDTO> list(Map<String, Object> map); // 회원 리스트
+	
+	void insertMember(MemberDTO dto);  // 회원가입
     
     String loginMember(Map<String, Object> map); // 로그인
     

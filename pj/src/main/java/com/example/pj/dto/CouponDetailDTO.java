@@ -8,13 +8,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CouponDetailDTO {
-	private int couponid;
-	private int couponState;
-	private int couponCode;
-	private String userid;
-	
-	// join column
-	private String couponName;
-	private int couponPrice;
-	private String couponImage;
+   private int couponid;
+   private int couponState;
+   private int couponCode;
+   private String userid;
+   
+   // join column
+   private String couponName;
+   private int couponPrice;
+   private String couponImage;
 }

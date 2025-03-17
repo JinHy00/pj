@@ -10,12 +10,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CouponDTO {
-	private int couponCode;
-	private String couponName;
-	private int couponPrice;
-	private int couponCount;
-	private String couponImage;
-	private MultipartFile couponImgURL;
-	
+   private int couponCode;
+   private String couponName;
+   private int couponPrice;
+   private int couponCount;
+   private String couponImage;
+   private MultipartFile couponImgURL;
+   
 }
-
