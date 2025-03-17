@@ -17,7 +17,7 @@ public class OrderDTO {
     private int orderAmount;
     private Date orderDate;
     private String recipient;
-    private String recPhoneNum;
+    private String rec_PhoneNum;
     private String zipCode;
     private String mainAddress;
     private String detailAddress;

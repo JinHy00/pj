@@ -53,4 +53,10 @@ public class OrderController {
     public void cancelOrder(@RequestParam int orderCode, @RequestParam String cancelReason) {
         orderService.cancelOrder(orderCode, cancelReason);
     }
+    
+    @PostMapping("state")
+    public void orderState(@RequestParam(name = "orderCode") int orderCode, @RequestParam(name = "orderState") int orderState) {
+        //TODO: process POST request
+    	orderService.updateOrderState(orderCode, orderState);
+    }
 }

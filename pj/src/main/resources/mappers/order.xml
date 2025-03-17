@@ -44,5 +44,18 @@
         SET status = '주문 취소', cancelReason = #{cancelReason}
         WHERE orderCode = #{orderCode}
     </update>
+    
+    <select id="orderList" resultType="com.example.pj.dto.OrderDTO">
+      select orderCode, o.productCode, orderAmount, orderState, orderDate, productName, price, mainImage
+      from orders o, product p
+      where o.productCode = p.productCode and userid = #{userid} 
+   </select>
+   
+   <update id="updateState">
+      update orders set
+      orderState = #{orderState} where orderCode = #{orderCode}
+   </update>
+   
+   
 
 </mapper>

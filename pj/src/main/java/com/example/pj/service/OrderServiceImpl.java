@@ -39,4 +39,5 @@ public class OrderServiceImpl implements OrderService {
     public void cancelOrder(int orderCode, String cancelReason) {
         orderMapper.cancelOrder(orderCode, cancelReason);
     }
+    
 }
