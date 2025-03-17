@@ -1,39 +1,45 @@
 package com.example.pj.service;
 
-import com.example.pj.dto.OrderDTO;
-import com.example.pj.mapper.OrderMapper;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.pj.dto.OrderDTO;
+import com.example.pj.dto.OrderItemDTO;
+import com.example.pj.mapper.OrderMapper;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+   @Autowired
+   OrderMapper orderMapper;
+   
+   @Override
+   public void insertOrder(OrderDTO dto) {
+      orderMapper.insertOrder(dto);
+   }
 
-    @Autowired
-    private OrderMapper orderMapper;
+   @Override
+   public void insertOrderItem(OrderItemDTO dto) {
+      orderMapper.insertOrderItem(dto);
 
-    // 특정 회원의 주문 목록 조회
-    @Override
-    public List<OrderDTO> getOrderListByUserId(String userId) {
-        return orderMapper.getOrderListByUserId(userId);
-    }
+   }
 
-    // 주문 상세 조회
-    @Override
-    public OrderDTO getOrderDetail(int orderCode) {
-        return orderMapper.getOrderDetail(orderCode);
-    }
+   @Override
+   public void downAmount(@Param(value = "productCode") int productCode, @Param(value = "orderAmount") int orderAmount) {
+      orderMapper.downAmount(productCode, orderAmount);
+   }
 
-    // 주문 생성
-    @Override
-    public void createOrder(OrderDTO order) {
-        orderMapper.createOrder(order);
-    }
+   @Override
+   public void updateOrderState(@Param(value = "orderCode") int orderCode, @Param(value = "orderState") int orderState) {
+      orderMapper.updateOrderState(orderCode, orderState);
 
-    // 주문 상태 변경
-    @Override
-    public void updateOrderState(int orderCode, int orderState) {
-        orderMapper.updateOrderState(orderCode, orderState);
-    }
+   }
+
+   @Override
+   public List<OrderDTO> orderList(String userid) {
+      return orderMapper.orderList(userid);
+   }
+
 }

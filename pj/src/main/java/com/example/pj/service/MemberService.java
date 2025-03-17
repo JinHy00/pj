@@ -2,11 +2,13 @@ package com.example.pj.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.example.pj.dto.MemberDTO;
 
 public interface MemberService {
-	List<MemberDTO> list(String searchkey, String keyword); // 회원 리스트
-	
+   List<MemberDTO> list(); // 회원 리스트
+   
     void insertMember(MemberDTO dto);  // 회원가입
     
     String loginMember(String userid, String passwd); // 로그인
@@ -22,8 +24,8 @@ public interface MemberService {
     int passwd_check(String userid, String passwd); // 비밀번호 확인
     
     // 포인트 사용
-    void use_point(String userid);
+    void use_point(@Param(value = "userid") String userid, @Param(value = "usePoint") int usePoint);
     
     // 포인트 적립
-    void save_point(String userid);
+    void save_point(@Param(value = "userid") String userid, @Param(value = "savePoint") int savePoint);
 }

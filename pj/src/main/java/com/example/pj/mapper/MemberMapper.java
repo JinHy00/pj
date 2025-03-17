@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.pj.dto.MemberDTO;
 
 @Mapper
 public interface MemberMapper {
-	List<MemberDTO> list(Map<String, Object> map); // 회원 리스트
-	
+   List<MemberDTO> list(); // 회원 리스트
+   
     void insertMember(MemberDTO dto);  // 회원가입
     
     String loginMember(Map<String, Object> map); // 로그인
@@ -26,8 +27,8 @@ public interface MemberMapper {
     int passwd_check(Map<String, Object> map); // 비밀번호 확인
     
     // 포인트 사용
-    void use_point(String userid);
+    void use_point(@Param(value = "userid") String userid, @Param(value = "usePoint") int usePoint);
     
     // 포인트 적립
-    void save_point(String userid);
+    void save_point(@Param(value = "userid") String userid, @Param(value = "savePoint") int savePoint);
 }

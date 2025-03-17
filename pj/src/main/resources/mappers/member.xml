@@ -1,52 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.pj.mapper.MemberMapper">  
-	
-	<select id="list" resultType="com.example.pj.dto.MemberDTO">
-	    select userid, name, passwd, email, phoneNum, zipCode, mainAddress, detailAddress, joindate, point
-	    from member
-	    <where>
-	        <if test="searchkey != 'all'">
-	            ${searchkey} like concat('%', #{keyword}, '%')
-	        </if>
-	        <if test="searchkey == 'all'">
-	            name like concat('%', #{keyword}, '%')
-	        </if>
-	    </where>
-	    order by joindate desc
-	</select>
 
-
-    
     <!-- 회원가입 -->
     <insert id="insertMember">
         insert into member (userid, name, passwd, email, phoneNum, zipCode, mainAddress, detailAddress)
         values (#{userid}, #{name}, #{passwd}, #{email}, #{phoneNum}, #{zipCode}, #{mainAddress}, #{detailAddress})
     </insert>
-	
-	<select id="loginMember" resultType="String">
-    	select name from member where userid = #{userid} and passwd = #{passwd}
-	</select>
-	
-	<select id="detail" resultType="com.example.pj.dto.MemberDTO">
-		select * from member where userid = #{userid}
-	</select>
-	
-	<delete id="delete">
-		delete from member where userid = #{userid}
-	</delete>
-	
-	<update id="update">
-		update member set
-		name = #{name}, email = #{email}, phoneNum = #{phoneNum}, zipCode = #{zipCode}, mainAddress = #{mainAddress}, detailAddress = #{detailAddress}
-		where userid = #{userid}
-	</update>
+   
+   <select id="loginMember" resultType="String">
+       select name from member where userid = #{userid} and passwd = #{passwd}
+   </select>
+   
+   <select id="detail" resultType="com.example.pj.dto.MemberDTO">
+      select * from member where userid = #{userid}
+   </select>
+   
+   <delete id="delete">
+      delete from member where userid = #{userid}
+   </delete>
+   
+   <update id="update">
+      update member set
+      name = #{name}, email = #{email}, phoneNum = #{phoneNum}, zipCode = #{zipCode}, mainAddress = #{mainAddress}, detailAddress = #{detailAddress}
+   </update>
 
-	<select id="id_check" resultType="int">
-		select count(*) from member where userid = #{userid}
-	</select>
-	
-	<select id="passwd_check" resultType="int">
-		select count(*) from member where userid = #{userid} and passwd = #{passwd}
-	</select>
+   <select id="id_check" resultType="int">
+      select count(*) from member where userid = #{userid}
+   </select>
+   
+   <select id="passwd_check" resultType="int">
+      select count(*) from member where userid = #{userid} and passwd = #{passwd}
+   </select>
+   
+   <update id="use_point">
+      update member set
+      point = point - #{usePoint}
+      where userid = #{userid}
+   </update>
+   
+   <update id="save_point">
+      update member set
+      point = point + #{savePoint}
+      where userid = #{userid}
+   </update>
 </mapper>
