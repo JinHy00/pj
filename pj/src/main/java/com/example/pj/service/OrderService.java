@@ -1,16 +1,11 @@
 package com.example.pj.service;
 
+import com.example.pj.dto.OrderDTO;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import com.example.pj.dto.OrderDTO;
-
-@Service
 public interface OrderService {
-    List<OrderDTO> getOrderList(String userId); // 주문 목록 가져오기
-    OrderDTO getOrderDetail(int orderCode); // 주문 상세 정보 가져오기
+    List<OrderDTO> getOrderListByUserId(String userId); // 특정 회원의 주문 목록 조회
+    OrderDTO getOrderDetail(int orderCode); // 주문 상세 조회
     void createOrder(OrderDTO order); // 주문 생성
-    void updateOrderStatus(int orderCode, String status); // 주문 상태 변경
-    void cancelOrder(int orderCode, String cancelReason); // 주문 취소
+    void updateOrderState(int orderCode, int orderState); // 주문 상태 변경
 }

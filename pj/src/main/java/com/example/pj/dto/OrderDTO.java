@@ -1,26 +1,28 @@
 package com.example.pj.dto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.Date;
 
 @Getter
 @Setter
 @ToString
 public class OrderDTO {
     private int orderCode;
-    private String userId;
-    private int couponId;
     private int productCode;
-    private int orderAmount;
-    private Date orderDate;
+    private String userId;
+    private Integer couponId;
     private String recipient;
-    private String rec_PhoneNum;
+    private String recPhoneNum;
     private String zipCode;
     private String mainAddress;
     private String detailAddress;
-    private String status;
-    private String cancelReason;
+    private Integer usePoint;
+    private int orderState;
+    private Date orderDate;
+    private String productName;
+    private int price;
+    private String mainImage;
 }
