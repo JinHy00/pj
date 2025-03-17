@@ -54,7 +54,7 @@ public class ReviewController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewCode", dto.getReviewCode());
-		map.put("orderCode", dto.getOrderCode());
+		map.put("productCode", dto.getProductCode());
 		map.put("userid", dto.getUserid());
 		map.put("reviewContent", dto.getReviewContent());
 		map.put("reviewScore", dto.getReviewScore());
@@ -91,7 +91,7 @@ public class ReviewController {
 		}
 		Map<String, Object> map = new HashMap<>();
 		map.put("reviewCode", dto.getReviewCode());
-		map.put("orderCode", dto.getOrderCode());
+		map.put("productCode", dto.getProductCode());
 		map.put("userid", dto.getUserid());
 		map.put("reviewContent", dto.getReviewContent());
 		map.put("reviewScore", dto.getReviewScore());
