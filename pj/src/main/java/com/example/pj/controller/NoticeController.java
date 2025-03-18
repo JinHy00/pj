@@ -35,6 +35,7 @@ public class NoticeController {
 	@PostMapping("/insert")
 	public String notice_insert(NoticeDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
+		System.out.println("오냐");
 		if (img != null && !img.isEmpty()) {
 			filename = img.getOriginalFilename();
 			try {
