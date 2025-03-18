@@ -13,7 +13,7 @@ public interface ProductService {
     List<ProductDTO> brandList(int brandCode, String keyword);
     
     // 카테고리(성별) 상품리스트
-    List<ProductDTO> genderList(String gender, String searchkey, String keyword);
+    List<ProductDTO> genderList(String gender, String keyword);
     
     List<BrandDTO> getAllBrands();
 

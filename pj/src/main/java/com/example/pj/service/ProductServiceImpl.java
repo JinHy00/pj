@@ -33,9 +33,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> genderList(String gender, String searchkey, String keyword) {
+    public List<ProductDTO> genderList(String gender, String keyword) {
         Map<String, Object> map = new HashMap<>();
-        map.put("searchkey", searchkey);
         map.put("keyword", keyword);
         map.put("gender", gender);
         return productMapper.genderList(map);

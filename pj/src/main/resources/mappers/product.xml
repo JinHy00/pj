@@ -33,20 +33,31 @@
 	    and productName  like concat ('%', #{keyword}, '%')
 	    order by productCode
 	</select>
-
-  
+	
+	<select id="genderList" resultType="com.example.pj.dto.ProductDTO">
+	    SELECT productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+	    FROM product p
+	    JOIN brand b ON p.brandCode = b.brandCode
+	    WHERE p.gender = #{gender}
+	    AND productName LIKE CONCAT('%', #{keyword}, '%')
+	    ORDER BY productCode;
+	</select>
+	
+	  
     <select id="gender_list" resultType="com.example.pj.dto.ProductDTO">
-        select  productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
-        from product p, brand b where p.brandCode = b.brandCode and gender = #{gender} and
-        <if test="searchkey == 'all'">
-            b.brandName like concat ('%', #{keyword}, '%') or
-            productName  like concat ('%', #{keyword}, '%')
-        </if>
-        <if test="searchkey !='all'">
-            ${searchkey} like concat ('%', #{keyword}, '%')
-        </if>
-        order by productCode
-    </select>
+	    select productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName
+	    from product p, brand b where p.brandCode = b.brandCode and gender = #{gender} and
+	    <if test="searchkey == 'all'">
+	        b.brandName like concat ('%', #{keyword}, '%') or
+	        productName like concat ('%', #{keyword}, '%')
+	    </if>
+	    <if test="searchkey != 'all'">
+	        ${searchkey} like concat ('%', #{keyword}, '%')
+	    </if>
+	    order by productCode
+	</select>
+
+
    
     <select id="detail" resultType="com.example.pj.dto.ProductDTO">
         select productCode, p.brandCode, productName, price, description, amount, capacity, gender, mainImage, detailImage, b.brandName

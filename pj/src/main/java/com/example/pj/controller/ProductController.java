@@ -62,11 +62,10 @@ public class ProductController {
 
 
     @RequestMapping(value = "list/gender/{gender}", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map<String, Object> list_gender(@RequestParam(name = "searchkey", defaultValue = "all") String searchkey,
-                                           @RequestParam(name = "keyword", defaultValue = "") String keyword,
+    public Map<String, Object> list_gender(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                            @PathVariable(name = "gender") String gender) {
         Map<String, Object> map = new HashMap<>();
-        List<ProductDTO> list = productService.genderList(gender, searchkey, keyword);
+        List<ProductDTO> list = productService.genderList(gender, keyword);  // 브랜드에 해당하는 상품만 반환
         if (list == null || list.isEmpty()) {
             map.put("message", "등록된 상품이 없습니다.");
         } else {
@@ -75,6 +74,7 @@ public class ProductController {
         map.put("keyword", keyword);
         return map;
     }
+
 
 
     @GetMapping("detail/{productCode}")

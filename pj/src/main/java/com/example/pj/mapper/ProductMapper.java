@@ -23,6 +23,7 @@ public interface ProductMapper {
       
       List<BrandDTO> getAllBrands();
       
+      
       // 상품정보
       ProductDTO detail(int productCode);
       
