@@ -30,5 +30,9 @@
 	    join product p on o.productCode = p.productCode
 	    where o.orderCode = #{orderCode}
 	</select>
+	
+	<select id="countProduct" resultType="int">
+      select amount from product where productCode = #{productCode}
+   </select>
 	   
 </mapper>

@@ -31,7 +31,8 @@ public interface OrderMapper {
     List<OrderDTO> orderList(String userid);
 
 	OrderDTO orderDetail(int orderCode);
-
+	
+	int countProduct(int productCode);
     
     // 주문 상품 상세 정보 => orderDate로 할 수도
     

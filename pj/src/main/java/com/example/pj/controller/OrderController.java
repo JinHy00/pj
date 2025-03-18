@@ -127,6 +127,23 @@ public class OrderController {
             return response;
         }
     }
+    
+    // 수량 확인
+    @PostMapping("count")
+    public Map<String, Object> count(@RequestParam(name = "productCode") int[] productCode, @RequestParam(name = "cartAmount") int[] cartAmount) {
+       Map<String, Object> map = new HashMap<>();
+       System.out.println("==count==");
+        for(int i=0;i<productCode.length;i++) {
+           int result = orderService.countProduct(productCode[i]);
+           // 수량 없거나 경우, 0인 경우
+           if(result < cartAmount[i] || result <= 0) {
+              map.put("message", "error");
+           } else {
+            map.put("message", "success");
+         }
+        }
+        return map;
+    }
 
 
  
