@@ -29,17 +29,17 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 	
-	@RequestMapping("/list")
-	public List<ReviewDTO> list(@RequestParam(name = "productCode") int productCode) {
+	@RequestMapping("/list/{productCode}")
+	public List<ReviewDTO> list(@PathVariable(name = "productCode") int productCode) {
 		return reviewService.list(productCode);
 	}
 	
-	@RequestMapping("/my_review")
+	@RequestMapping("/my_list")
 	public List<ReviewDTO> my_review(@RequestParam(name = "userid") String userid) {
 		return reviewService.my_review(userid);
 	}
 	
-	@PostMapping("/insert")
+	@PostMapping("/insert/{productCode}")
 	public String insert(ReviewDTO dto, @RequestParam(name = "img", required = false) MultipartFile img, HttpServletRequest request) {
 		String filename = "-";
 		if (img != null && !img.isEmpty()) {
@@ -67,8 +67,18 @@ public class ReviewController {
 		return reviewService.detail(reviewCode);
 	}
 	
-	@GetMapping("/edit/{reviewCode}")
+	@GetMapping("/my_detail/{reviewCode}")
+	public ReviewDTO my_detail(@PathVariable(name = "reviewCode") int reviewCode) {
+		return reviewService.detail(reviewCode);
+	}
+	
+	@GetMapping("/edit/{reviewCode}/{productCode}")
 	public ReviewDTO edit(@PathVariable(name = "reviewCode") int reviewCode) {
+		return reviewService.edit(reviewCode);
+	}
+	
+	@GetMapping("/my_edit/{reviewCode}/{productCode}")
+	public ReviewDTO my_edit(@PathVariable(name = "reviewCode") int reviewCode) {
 		return reviewService.edit(reviewCode);
 	}
 	

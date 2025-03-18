@@ -3,10 +3,10 @@
 <mapper namespace="review">
 
 	<select id="list" resultType="com.example.pj.dto.ReviewDTO">
-		select reviewCode, r.userid, reviewDate, reviewContent, reviewFile, reviewScore
+		select reviewCode, r.productCode, r.userid, reviewDate, reviewContent, reviewFile, reviewScore
 		from review r
 		join product p on r.productCode = p.productCode
-		where productCode=#{productCode} 
+		where r.productCode=#{productCode} 
 	</select>
 	
 	<select id="my_review" resultType="com.example.pj.dto.ReviewDTO">
