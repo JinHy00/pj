@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pj.mapper.BrandMapper">
+   <select id="list" resultType="com.example.pj.dto.BrandDTO">
+      select * from brand order by brandCode
+   </select>
+   
+   <insert id="insert">
+      insert into brand (brandName, email, phoneNum, address, brandInfo)
+      values (#{brandName}, #{email}, #{phoneNum}, #{address}, #{brandInfo})
+   </insert>
+   
+   <select id="detail" resultType="com.example.pj.dto.BrandDTO">
+      select * from brand where brandCode = #{brandCode}
+   </select>
+   
+   <update id="update">
+      update brand set
+      brandName = #{brandName}, email = #{email}, phoneNum = #{phoneNum}, address = #{address}, brandInfo = #{brandInfo}
+      where brandCode = #{brandCode}
+   </update>
+   
+   <delete id="delete">
+      delete from brand where brandCode = #{brandCode}
+   </delete>
+</mapper>
